@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
+using Commons.Entities;
 using Microsoft.Extensions.Options;
 using Oracle.ManagedDataAccess.Client;
 
@@ -11,16 +12,14 @@ namespace AccountOpening.Entities
 {
     public class AccountOpeningRepository : IAccountOpeningRepository
     {
-        private readonly AccountOpeningDBContext _context;
         private readonly AppSettings _appSettings;
 
-        public AccountOpeningRepository(AccountOpeningDBContext context, IOptions<AppSettings> appSettings)
+        public AccountOpeningRepository(IOptions<AppSettings> appSettings)
         {
-            _context = context;
             _appSettings = appSettings.Value;
         }
 
-        public bool AddCustomer(UploadPersonal up, UploadCustomer uc)
+        public async Task<bool> AddCustomer(Personal p, Customer uc)
         {
             int rowAffected = 0;
 
@@ -52,8 +51,8 @@ namespace AccountOpening.Entities
                                                         :NATIONAL_ID,:PASSPORT_NO,:PPT_ISS_DATE,:PPT_EXP_DATE,:D_ADDRESS1,:D_ADDRESS2,:D_ADDRESS3,:TELEPHONE,
                                                         :FAX,:E_MAIL,:P_ADDRESS1,:P_ADDRESS3,:P_ADDRESS2,:CUSTOMER_NO,:D_COUNTRY,:P_COUNTRY,:MAINTENANCE_SEQ_NO)";
 
-                rowAffected = oralConnect.Execute(queryCustomer, uc, transaction);
-                rowAffected += oralConnect.Execute(queryPersonal, up, transaction);
+                rowAffected =  await oralConnect.ExecuteAsync(queryCustomer, uc, transaction);
+                rowAffected += await oralConnect.ExecuteAsync(queryPersonal, p, transaction);
 
                 transaction.Commit();
             }
@@ -61,7 +60,7 @@ namespace AccountOpening.Entities
             return (rowAffected > 0);
         }
 
-        public bool ExecuteNewCustomer(ExecuteCustomer executeCustomer)
+        public async Task<bool> ExecuteNewCustomer(ExecuteCustomer executeCustomer)
         {
             var oralConnect = new OracleConnection(_appSettings.FlexConnection);
             string query = $@"DECLARE
@@ -93,21 +92,21 @@ namespace AccountOpening.Entities
 
                                     END;";
 
-            var r = oralConnect.Execute(query, executeCustomer);
+            var r = await oralConnect.ExecuteAsync(query, executeCustomer);
 
             return true;
         }
 
-        public bool CustomerExist(string customerNo)
+        public async Task<bool> CustomerExist(string customerNo)
         {
-            var customer = new List<CustomerNo>();
+            IEnumerable<CustomerNo> customer = new List<CustomerNo>();
             var oralConnect = new OracleConnection(_appSettings.FlexConnection);
             try
             {
                 string query = $@"select * from {_appSettings.FlexSchema}.sttm_customer where customer_no=:customerNo AND record_stat='O'";
                 using (oralConnect)
                 {
-                    customer = oralConnect.Query<CustomerNo>(query, new { customerNo }).ToList();
+                    customer = await oralConnect.QueryAsync<CustomerNo>(query, new { customerNo });
                 }
             }
             catch (Exception ex)
@@ -118,7 +117,7 @@ namespace AccountOpening.Entities
             return (customer.Count() > 0);
         }
 
-        public bool AddAccount(UploadAccount ua)
+        public async Task<bool> AddAccount(Account a)
         {
             int r = 0;
             var oralConnect = new OracleConnection(_appSettings.FlexConnection);
@@ -161,13 +160,13 @@ namespace AccountOpening.Entities
 
                 oralConnect.Open();
 
-                r = oralConnect.Execute(queryAccount, ua);
+                r = await oralConnect.ExecuteAsync(queryAccount, a);
             }
 
             return (r > 0);
         }
 
-        public bool ExecuteNewAccount(ExecuteCustomer executeCustomer)
+        public async Task<bool> ExecuteNewAccount(ExecuteCustomer executeCustomer)
         {
             var oralConnect = new OracleConnection(_appSettings.FlexConnection);
             string query = $@"DECLARE
@@ -195,9 +194,9 @@ namespace AccountOpening.Entities
 
                                 END;";
 
-            var r = oralConnect.Execute(query, executeCustomer);
+            var r = await oralConnect.ExecuteAsync(query, executeCustomer);
 
-            return (r > 1);
+            return true;
         }
     }
 }

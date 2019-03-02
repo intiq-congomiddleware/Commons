@@ -1,0 +1,14 @@
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netcoreapp2.1\Commons.deps.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netcoreapp2.1\Commons.runtimeconfig.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netcoreapp2.1\Commons.runtimeconfig.dev.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netcoreapp2.1\Commons.dll
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.csprojAssemblyReference.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.csproj.CoreCompileInputs.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.RazorAssemblyInfo.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.RazorAssemblyInfo.cs
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.AssemblyInfoInputs.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.AssemblyInfo.cs
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.RazorTargetAssemblyInfo.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.dll
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.pdb

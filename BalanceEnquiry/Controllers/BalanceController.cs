@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using BalanceEnquiry.Entities;
 using BalanceEnquiry.Helpers;
+using Commons.Entities;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ namespace BalanceEnquiry.Controllers
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [EnableCors("AccessAgencyBankingCorsPolicy")]
     [Produces("application/json")]
-    [Route("v1")]
+    [Route("v1/balance")]
     [ApiController]
     public class BalanceController : Controller
     {
@@ -27,29 +28,29 @@ namespace BalanceEnquiry.Controllers
             _orclRepo = orclRepo;
         }
 
-        [HttpPost("Enquiry")]
-        [ProducesResponseType(typeof(BalanceEnquiryResponse), 200)]
-        [ProducesResponseType(typeof(BalanceEnquiryResponse), 400)]
-        [ProducesResponseType(typeof(BalanceEnquiryResponse), 500)]
-        public async Task<IActionResult> Enquiry([FromBody] BalanceEnquiryRequest request)
+        [HttpPost("enquiry")]
+        [ProducesResponseType(typeof(Response), 200)]
+        [ProducesResponseType(typeof(Response), 400)]
+        [ProducesResponseType(typeof(Response), 500)]
+        public async Task<IActionResult> enquiry([FromBody] BalanceEnquiryRequest request)
         {
             BalanceEnquiryResponse b = new BalanceEnquiryResponse();
             try
             {
                 if (!ModelState.IsValid)
-                    return BadRequest(Utility.GetResponse(ModelState));
+                    return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
 
                 request.userId = "SYSTEM";
 
-                b = _orclRepo.GetBalanceEnquiry(request);
+                b = await _orclRepo.GetBalanceEnquiry(request);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex.ToString()} :  {b}");
-                return StatusCode((int)HttpStatusCode.InternalServerError, Utility.GetResponse(ex));
+                _logger.LogError($"{request.accountNumber}:- {Environment.NewLine} {ex.ToString()}");
+                return StatusCode((int)HttpStatusCode.InternalServerError, Commons.Helpers.Utility.GetResponse(ex));
             }
 
-            return CreatedAtAction("Enquiry", b);
+            return CreatedAtAction("enquiry", b);
         }
     }
 }

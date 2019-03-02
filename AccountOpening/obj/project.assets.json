@@ -3118,6 +3118,18 @@
           "lib/netstandard2.0/Serilog.Extensions.Logging.dll": {}
         }
       },
+      "Serilog.Formatting.Compact/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/Serilog.Formatting.Compact.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/Serilog.Formatting.Compact.dll": {}
+        }
+      },
       "Serilog.Settings.Configuration/3.0.1": {
         "type": "package",
         "dependencies": {
@@ -8023,6 +8035,21 @@
         "serilog.extensions.logging.nuspec"
       ]
     },
+    "Serilog.Formatting.Compact/1.0.0": {
+      "sha512": "r3QYz02y7+B7Ng30hyJM929OJhem7SsJ4XDUE0Zfptj2MRiQfpPUb5f58juAFjp/TnNeSX2QNzZEnHwLeoJfHQ==",
+      "type": "package",
+      "path": "serilog.formatting.compact/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Serilog.Formatting.Compact.dll",
+        "lib/net45/Serilog.Formatting.Compact.xml",
+        "lib/netstandard1.1/Serilog.Formatting.Compact.dll",
+        "lib/netstandard1.1/Serilog.Formatting.Compact.xml",
+        "serilog.formatting.compact.1.0.0.nupkg.sha512",
+        "serilog.formatting.compact.nuspec"
+      ]
+    },
     "Serilog.Settings.Configuration/3.0.1": {
       "sha512": "c9W5OWJgyDWIfewzzSOBUve7XKRyXTt+A8McIBKY/lydI478JnxZUTbbigAtzEIq+FecZGQ5QgA8oUBFi40odA==",
       "type": "package",
@@ -12716,6 +12743,7 @@
       "NSwag.AspNetCore >= 11.20.1",
       "Oracle.ManagedDataAccess.Core >= 2.18.3",
       "Serilog.AspNetCore >= 2.1.1",
+      "Serilog.Formatting.Compact >= 1.0.0",
       "Serilog.Settings.Configuration >= 3.0.1",
       "Serilog.Sinks.RollingFile >= 3.3.0",
       "System.Configuration.ConfigurationManager >= 4.5.0"
@@ -12801,6 +12829,10 @@
           "Serilog.AspNetCore": {
             "target": "Package",
             "version": "[2.1.1, )"
+          },
+          "Serilog.Formatting.Compact": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "Serilog.Settings.Configuration": {
             "target": "Package",

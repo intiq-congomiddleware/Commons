@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AccountOpening.Entities;
-using AccountOpening.Interceptors;
+using Commons.Interceptors;
+using Commons.Entities;
 using AccountOpening.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -13,7 +14,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -81,18 +81,13 @@ namespace AccountOpening
 
             //Oracle  Repositories
             services.AddScoped<IAccountOpeningRepository, AccountOpeningRepository>();
-            services.AddScoped<AccountOpeningDBContext>();
-
-            services.AddDbContext<AccountOpeningDBContext>(options =>
-            {
-               options.UseOracle(Configuration.GetSection("ConnectionStrings:FlexConnection").Value);
-            }, ServiceLifetime.Scoped);
 
             services.AddMvc().AddFluentValidation(fvc => { }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory
+            , IOptions<AppSettings> options)
         {
             if (env.IsDevelopment())
             {
@@ -100,7 +95,7 @@ namespace AccountOpening
             }
 
             loggerFactory.AddSerilog();
-            app.UseRequestResponseLogger();
+            app.UseRequestResponseLogger(options);
             app.UseMvc();
 
             app.UseSwaggerUi3WithApiExplorer(settings =>

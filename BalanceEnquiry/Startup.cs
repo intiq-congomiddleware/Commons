@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BalanceEnquiry.Entities;
-using BalanceEnquiry.Interceptors;
+using Commons.Interceptors;
+using Commons.Entities;
 using BalanceEnquiry.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -84,7 +85,8 @@ namespace BalanceEnquiry
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory
+            , IOptions<AppSettings> options)
         {
             if (env.IsDevelopment())
             {
@@ -92,7 +94,7 @@ namespace BalanceEnquiry
             }
 
             loggerFactory.AddSerilog();
-            app.UseRequestResponseLogger();
+            app.UseRequestResponseLogger(options);
             app.UseMvc();
 
             app.UseSwaggerUi3WithApiExplorer(settings =>

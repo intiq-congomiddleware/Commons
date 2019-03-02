@@ -8,10 +8,10 @@ namespace AccountOpening.Entities
 {
     public interface IAccountOpeningRepository
     {
-        bool AddCustomer(UploadPersonal up, UploadCustomer uc);
-        bool ExecuteNewCustomer(ExecuteCustomer executeCustomer);
-        bool CustomerExist(string customerNo);
-        bool AddAccount(UploadAccount ua);
-        bool ExecuteNewAccount(ExecuteCustomer executeCustomer);
+        Task<bool> AddCustomer(Personal p, Customer c);
+        Task<bool> ExecuteNewCustomer(ExecuteCustomer executeCustomer);
+        Task<bool> CustomerExist(string customerNo);
+        Task<bool> AddAccount(Account a);
+        Task<bool> ExecuteNewAccount(ExecuteCustomer executeCustomer);
     }
 }

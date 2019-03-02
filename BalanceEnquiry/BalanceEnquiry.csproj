@@ -22,4 +22,10 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Commons">
+      <HintPath>..\Commons\bin\Debug\netcoreapp2.1\Commons.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "c69072862c26eb9a8c9a5264981dc3113be39926"
+    "signature": "8b55c5b80a2fab00601d7ea46fbef4d326854fff"
   },
   "compilationOptions": {
     "defines": [
@@ -33,9 +33,11 @@
           "NSwag.AspNetCore": "11.20.1",
           "Oracle.ManagedDataAccess.Core": "2.18.3",
           "Serilog.AspNetCore": "2.1.1",
+          "Serilog.Formatting.Compact": "1.0.0",
           "Serilog.Settings.Configuration": "3.0.1",
           "Serilog.Sinks.RollingFile": "3.3.0",
-          "System.Configuration.ConfigurationManager": "4.5.0"
+          "System.Configuration.ConfigurationManager": "4.5.0",
+          "Commons": "1.0.0.0"
         },
         "runtime": {
           "AccountOpening.dll": {}
@@ -574,6 +576,20 @@
           "lib/netstandard2.0/Serilog.Extensions.Logging.dll": {}
         }
       },
+      "Serilog.Formatting.Compact/1.0.0": {
+        "dependencies": {
+          "Serilog": "2.6.0"
+        },
+        "runtime": {
+          "lib/netstandard1.1/Serilog.Formatting.Compact.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.1/Serilog.Formatting.Compact.dll": {}
+        }
+      },
       "Serilog.Settings.Configuration/3.0.1": {
         "dependencies": {
           "Microsoft.Extensions.DependencyModel": "2.1.0",
@@ -718,6 +734,17 @@
         }
       },
       "System.ValueTuple/4.5.0": {},
+      "Commons/1.0.0.0": {
+        "runtime": {
+          "Commons.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "Commons.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
@@ -3778,6 +3805,13 @@
       "path": "serilog.extensions.logging/2.0.0",
       "hashPath": "serilog.extensions.logging.2.0.0.nupkg.sha512"
     },
+    "Serilog.Formatting.Compact/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-r3QYz02y7+B7Ng30hyJM929OJhem7SsJ4XDUE0Zfptj2MRiQfpPUb5f58juAFjp/TnNeSX2QNzZEnHwLeoJfHQ==",
+      "path": "serilog.formatting.compact/1.0.0",
+      "hashPath": "serilog.formatting.compact.1.0.0.nupkg.sha512"
+    },
     "Serilog.Settings.Configuration/3.0.1": {
       "type": "package",
       "serviceable": true,
@@ -3875,6 +3909,11 @@
       "sha512": "sha512-+gDrtQRdEsUSdPZEEcVRmBvs6xJmqGBqRzEGMQm5XqHxWTkZe/PSuomdth5ZPcOb/Oh2kIu6NChoI1JQk649jg==",
       "path": "system.valuetuple/4.5.0",
       "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
+    },
+    "Commons/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",

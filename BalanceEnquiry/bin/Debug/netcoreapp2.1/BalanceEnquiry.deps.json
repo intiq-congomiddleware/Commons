@@ -35,7 +35,8 @@
           "Serilog.AspNetCore": "2.1.1",
           "Serilog.Settings.Configuration": "3.0.1",
           "Serilog.Sinks.RollingFile": "3.3.0",
-          "System.Configuration.ConfigurationManager": "4.5.0"
+          "System.Configuration.ConfigurationManager": "4.5.0",
+          "Commons": "1.0.0.0"
         },
         "runtime": {
           "BalanceEnquiry.dll": {}
@@ -868,6 +869,17 @@
         }
       },
       "System.ValueTuple/4.5.0": {},
+      "Commons/1.0.0.0": {
+        "runtime": {
+          "Commons.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "Commons.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
@@ -4150,6 +4162,11 @@
       "sha512": "sha512-+gDrtQRdEsUSdPZEEcVRmBvs6xJmqGBqRzEGMQm5XqHxWTkZe/PSuomdth5ZPcOb/Oh2kIu6NChoI1JQk649jg==",
       "path": "system.valuetuple/4.5.0",
       "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
+    },
+    "Commons/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",

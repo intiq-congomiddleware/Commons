@@ -7,8 +7,6 @@ namespace BalanceEnquiry.Entities
 {
     public class BalanceEnquiryResponse
     {
-        public bool status { get; set; }
-        public List<string> message { get; set; }
         public string run_userid { get; set; }
         public DateTime rundate { get; set; }
         public DateTime startdate { get; set; }

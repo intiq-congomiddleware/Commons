@@ -1,94 +1,16 @@
 ﻿using AccountOpening.Entities;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace AccountOpening.Helpers
 {
     public static class Utility
     {
-        public static AccountOpeningResponse GetResponse_(ModelStateDictionary ModelState)
+        public static Customer GetCustomer(AccountOpeningRequest c)
         {
-            List<string> errormsg = new List<string>();
-            foreach (var modelState in ModelState.Values)
-            {
-                foreach (var modelError in modelState.Errors)
-                {
-                    if (!string.IsNullOrEmpty(modelError.ErrorMessage))
-                        errormsg.Add(modelError.ErrorMessage);
-                }
-            }
-            return new AccountOpeningResponse()
-            {
-                status = false,
-                message = errormsg
-            };
-        }
-        public static AccountOpeningResponse2 GetResponse(ModelStateDictionary ModelState)
-        {
-            var errormsg = new Dictionary<string, string>();
-            foreach (var modelState in ModelState.Values)
-            {
-                foreach (var modelError in modelState.Errors)
-                {
-                    if (!string.IsNullOrEmpty(modelError.ErrorMessage))
-                        errormsg.Add(modelState.AttemptedValue, modelError.ErrorMessage);
-                }
-            }
-
-            return new AccountOpeningResponse2()
-            {
-                status = false,
-                message = errormsg
-            };
-        }
-        public static AccountOpeningResponse GetResponse(Exception ex)
-        {
-            Console.WriteLine(ex.ToString());
-            List<string> errormsg = new List<string>();
-            errormsg.Add(ex.Message);
-
-            return new AccountOpeningResponse()
-            {
-                status = false,
-                message = errormsg
-            };
-        }
-        public static AccountOpeningResponse GetResponse(Exception ex, HttpStatusCode statuscode)
-        {
-            Console.WriteLine(ex.ToString());
-            List<string> errormsg = new List<string>();
-            errormsg.Add(ex.Message);
-
-            return new AccountOpeningResponse()
-            {
-                status = false,
-                message = errormsg
-            };
-        }
-        public static AccountOpeningResponse GetResponse(string msg, HttpStatusCode statuscode)
-        {
-            Console.WriteLine(msg);
-            List<string> errormsg = new List<string>();
-            errormsg.Add(msg);
-
-            return new AccountOpeningResponse()
-            {
-                status = false,
-                message = errormsg
-            };
-        }
-
-        public static UploadCustomer GetUploadCustomer(Customer c)
-        {
-            UploadCustomer u = new UploadCustomer();
+            Customer u = new Customer();
 
             u.SOURCE_CODE = "CUST_UPD";
-            u.MAINTENANCE_SEQ_NO = GetReferenceNo();// = helper.GetReferenceNo();
+            u.MAINTENANCE_SEQ_NO = Commons.Helpers.Utility.GetReferenceNo();// = helper.GetReferenceNo();
             u.CUSTOMER_NO = "AUTO";
             u.CUSTOMER_TYPE = c.CUSTOMER_TYPE;
             u.CUSTOMER_NAME1 = c.CUSTOMER_NAME;
@@ -141,11 +63,11 @@ namespace AccountOpening.Helpers
             return u;
         }
 
-        public static UploadPersonal GetUploadPersonal(Customer c)
+        public static Personal GetPersonal(AccountOpeningRequest c)
         {
-            UploadPersonal u = new UploadPersonal();
+            Personal u = new Personal();
 
-            u.MAINTENANCE_SEQ_NO = GetReferenceNo();
+            u.MAINTENANCE_SEQ_NO = Commons.Helpers.Utility.GetReferenceNo();
             u.CUSTOMER_PREFIX = c.CUSTOMER_PREFIX;
             u.FIRST_NAME = c.FIRST_NAME;
             u.MIDDLE_NAME = c.MIDDLE_NAME;
@@ -172,11 +94,11 @@ namespace AccountOpening.Helpers
 
             return u;
         }
-        public static UploadAccount GetAccountUpload(Customer c)
+        public static Account GetAccount(AccountOpeningRequest c)
         {
-            UploadAccount u = new UploadAccount();
+            Account u = new Account();
 
-            u.MAINTENANCE_SEQ_NO = c.MAINTENANCE_SEQ_NO; //=helper.GetReferenceNo();
+            u.MAINTENANCE_SEQ_NO = Commons.Helpers.Utility.GetReferenceNo(); //=helper.GetReferenceNo();
             u.SOURCE_CODE = "CUSTACC_UPLOAD";
             u.BRANCH_CODE = c.BRANCH_CODE;
             u.CUST_AC_NO = "AUTO";
@@ -238,29 +160,10 @@ namespace AccountOpening.Helpers
             u.DEFER_RECON = "N";
             u.CONSOLIDATION_REQD = "N";
             u.FUNDING = "N";
-            u.ALT_AC_NO = GetReferenceNo();
+            u.ALT_AC_NO = Commons.Helpers.Utility.GetReferenceNo();
             u.AUTO_PROV_REQD = "N";
 
             return u;
-        }
-
-        public static string GetReferenceNo()
-        {
-            string rand = string.Empty;
-            try
-            {
-                CultureInfo ci = CultureInfo.InvariantCulture;
-                var refNo = new Random(Guid.NewGuid().GetHashCode());
-                string referenceNo = "";// refNo.Next(9).ToString(CultureInfo.InvariantCulture).Trim();
-                string datetimeStamp = DateTime.UtcNow.ToString("ddMMyyyyHHmmssf", ci);
-                rand = referenceNo + datetimeStamp;
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("GetReferenceNo", ex.Message + "" + ex.StackTrace, "");
-            }
-            return rand;
         }
     }
 }

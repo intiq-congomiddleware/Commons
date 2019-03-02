@@ -7,6 +7,6 @@ namespace BalanceEnquiry.Entities
 {
     public interface IBalanceEnquiryRepository
     {
-        BalanceEnquiryResponse GetBalanceEnquiry(BalanceEnquiryRequest request);
+        Task<BalanceEnquiryResponse> GetBalanceEnquiry(BalanceEnquiryRequest request);
     }
 }
