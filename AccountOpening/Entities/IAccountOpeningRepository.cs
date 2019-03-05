@@ -13,5 +13,6 @@ namespace AccountOpening.Entities
         Task<bool> CustomerExist(string customerNo);
         Task<bool> AddAccount(Account a);
         Task<bool> ExecuteNewAccount(ExecuteCustomer executeCustomer);
+        Task<AccountOpeningRequest> GetCustomer(string seq_num, string acct_class);
     }
 }

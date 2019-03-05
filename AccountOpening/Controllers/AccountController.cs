@@ -51,16 +51,31 @@ namespace AccountOpening.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
 
-                bool customerExists = !string.IsNullOrEmpty(request.CUSTOMER_NO)
-                    && await _orclRepo.CustomerExist(request.CUSTOMER_NO);
-
-                if (customerExists)
+                if (!string.IsNullOrEmpty(request.CUSTOMER_NO))
                 {
-                    a.status = await CreateAccount(request, e);
+                    bool customerExists = await _orclRepo.CustomerExist(request.CUSTOMER_NO);
+
+                    if (customerExists)
+                    {
+                        a.status = await CreateAccount(request, e);
+                    }
                 }
                 else
                 {
-                    a.status = await CreateCustomer(request, e) && await CreateAccount(request, e);
+                    var tuple = await CreateCustomer(request, e);
+
+                    if (tuple.Item1)
+                    {
+                        AccountOpeningRequest req = await _orclRepo.GetCustomer(tuple.Item2.MAINTENANCE_SEQ_NO, 
+                            request.ACCOUNT_CLASS);
+
+                        //Remove on go live
+                        _logger.LogInformation($"MAINTENANCE_SEQ_NO : {tuple.Item2.MAINTENANCE_SEQ_NO} ACCOUNT_CLASS " +
+                            $": {request.ACCOUNT_CLASS} CustomerNo: {req.CUSTOMER_NO}");
+
+                        request.CUSTOMER_NO = req.CUSTOMER_NO;
+                        a.status = await CreateAccount(request, e);
+                    }
                 }
 
                 a.message = (a.status) ? "Account Created Successfully" : "Account Creation Failed";
@@ -103,7 +118,7 @@ namespace AccountOpening.Controllers
             return isAccountAdded && isAccountExecuted;
         }
 
-        private async Task<bool> CreateCustomer(AccountOpeningRequest request, ExecuteCustomer e)
+        private async Task<Tuple<bool, Customer>> CreateCustomer(AccountOpeningRequest request, ExecuteCustomer e)
         {
             Customer c = new Customer();
             Personal p = new Personal();
@@ -136,7 +151,7 @@ namespace AccountOpening.Controllers
                 _logger.LogError(ex.ToString());
             }
 
-            return isCustomerAdded && isCustomerExecuted;
+            return new Tuple<bool, Customer>(isCustomerAdded && isCustomerExecuted, c);
         }
     }
 }

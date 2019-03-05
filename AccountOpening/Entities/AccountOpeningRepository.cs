@@ -112,6 +112,7 @@ namespace AccountOpening.Entities
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                return false;
             }  
             
             return (customer.Count() > 0);
@@ -197,6 +198,32 @@ namespace AccountOpening.Entities
             var r = await oralConnect.ExecuteAsync(query, executeCustomer);
 
             return true;
+        }
+
+        public async Task<AccountOpeningRequest> GetCustomer(string seq_num, string acct_class)
+        {
+            IEnumerable<AccountOpeningRequest> customer = new List<AccountOpeningRequest>();
+            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            try
+            {
+                string query = $@"select a.*, c.account_class,a.customer_name1 customer_name,
+                                  a.address_line1 D_address1,a.address_line2 D_address2,a.address_line3 D_address3,a.address_line4 D_address4,
+                                  c.dr_gl,c.cr_gl,c.dr_cb_line,c.cr_cb_line,c.dr_ho_line,c.cr_ho_line,A.LOCAL_BRANCH 
+                                  from FCCUAT.STTM_UPLOAD_CUSTOMER a
+                                  left join FCCUAT.sttm_account_class_status c on  c.account_class = :acct_class
+                                  where a.MAINTENANCE_SEQ_NO = :seq_num AND c.status = 'NORM'";
+
+                using (oralConnect)
+                {
+                    customer = await oralConnect.QueryAsync<AccountOpeningRequest>(query, new { seq_num, acct_class });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return customer.FirstOrDefault();
         }
     }
 }

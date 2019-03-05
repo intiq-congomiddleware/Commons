@@ -33,7 +33,7 @@ namespace BalanceEnquiry.Entities
 
                 var brs = await oralConnect.QueryAsync<BalanceEnquiryResponse>(query, new { request.accountNumber });
 
-                if (brs == null)
+                if (brs.Count() <= 0)
                 {
                     string new_query = $@" SELECT ACCOUNT_CLASS COD_PROD, CUST_AC_NO COD_ACCT_NO,
                                   nvl({_appSettings.FlexSchema}.GET_AC_CUST_DLY_CLOSING_BAL(:accountNumber, sysdate), 0)  BAL_AVAILABLE,
