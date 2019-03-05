@@ -57,7 +57,7 @@ namespace AccountOpening.Controllers
 
                     if (customerExists)
                     {
-                        a.status = await CreateAccount(request, e);
+                        a.status = await CreateAccount(request, e, request.CUSTOMER_NO);
                     }
                 }
                 else
@@ -66,23 +66,7 @@ namespace AccountOpening.Controllers
 
                     if (tuple.Item1)
                     {
-                        AccountOpeningRequest req = await _orclRepo.GetCustomer(tuple.Item2.MAINTENANCE_SEQ_NO, 
-                            request.ACCOUNT_CLASS);
-
-                        //Remove on go live
-                        _logger.LogInformation($"MAINTENANCE_SEQ_NO : {tuple.Item2.MAINTENANCE_SEQ_NO} ACCOUNT_CLASS " +
-                            $": {request.ACCOUNT_CLASS} CustomerNo: {req.CUSTOMER_NO} CR_HO_LINE: {req.CR_HO_LINE} " +
-                            $"DR_HO_LINE: {req.DR_HO_LINE}");
-
-                        request.CUSTOMER_NO = req.CUSTOMER_NO;
-                        request.DR_CB_LINE = req.DR_CB_LINE;
-                        request.CR_CB_LINE = req.CR_CB_LINE;
-                        request.CR_HO_LINE = req.CR_HO_LINE;
-                        request.DR_HO_LINE = req.DR_HO_LINE;
-                        request.DR_GL = req.DR_GL;
-                        req.CR_GL = req.CR_GL;
-
-                        a.status = await CreateAccount(request, e);
+                        a.status = await CreateAccount(request, e, tuple.Item2.MAINTENANCE_SEQ_NO);
                     }
                 }
 
@@ -97,16 +81,39 @@ namespace AccountOpening.Controllers
             return CreatedAtAction("create", a);
         }
 
-        private async Task<bool> CreateAccount(AccountOpeningRequest request, ExecuteCustomer e)
+        private async Task<bool> CreateAccount(AccountOpeningRequest request, ExecuteCustomer e, string param)
         {
             bool isAccountAdded = false;
             bool isAccountExecuted = false;
 
             Account u = new Account();
+            AccountOpeningRequest req = null;
 
             try
             {
+
                 //Get Account
+                if (!string.IsNullOrEmpty(request.CUSTOMER_NO))
+                {
+                    req = await _orclRepo.GetCustomerByNumber(param, request.ACCOUNT_CLASS);
+                }
+                else
+                {
+                    req = await _orclRepo.GetCustomer(param, request.ACCOUNT_CLASS);
+                }
+                //Remove on go live
+                _logger.LogInformation($"MAINTENANCE_SEQ_NO : {param} ACCOUNT_CLASS " +
+                    $": {request.ACCOUNT_CLASS} CustomerNo: {req.CUSTOMER_NO} CR_HO_LINE: {req.CR_HO_LINE} " +
+                    $"DR_HO_LINE: {req.DR_HO_LINE}");
+
+                request.CUSTOMER_NO = req?.CUSTOMER_NO;
+                request.DR_CB_LINE = req?.DR_CB_LINE;
+                request.CR_CB_LINE = req?.CR_CB_LINE;
+                request.CR_HO_LINE = req?.CR_HO_LINE;
+                request.DR_HO_LINE = req?.DR_HO_LINE;
+                request.DR_GL = req?.DR_GL;
+                request.CR_GL = req?.CR_GL;
+
                 u = Utility.GetAccount(request);
                 _logger.LogInformation("requested upload account");
 
