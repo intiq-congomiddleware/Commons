@@ -1,9 +1,3 @@
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.csprojAssemblyReference.cache
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.csproj.CoreCompileInputs.cache
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.RazorAssemblyInfo.cache
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.RazorAssemblyInfo.cs
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.AssemblyInfoInputs.cache
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.AssemblyInfo.cs
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\AccountOpening.deps.json
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\AccountOpening.runtimeconfig.json
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\AccountOpening.runtimeconfig.dev.json
@@ -11,6 +5,11 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debu
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\AccountOpening.pdb
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.csproj.CoreCompileInputs.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.RazorAssemblyInfo.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.RazorAssemblyInfo.cs
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.AssemblyInfoInputs.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.AssemblyInfo.cs
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.RazorTargetAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.dll

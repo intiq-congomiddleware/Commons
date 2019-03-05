@@ -7,20 +7,10 @@ namespace BalanceEnquiry.Entities
 {
     public class BalanceEnquiryResponse
     {
-        public string run_userid { get; set; }
-        public DateTime rundate { get; set; }
-        public DateTime startdate { get; set; }
-        public DateTime enddate { get; set; }
-        public string accountno { get; set; }
-        public decimal totaldr { get; set; }
-        public decimal totalcr { get; set; }
-        public decimal drcount { get; set; }
-        public decimal crcount { get; set; }
-        public decimal openingbalance { get; set; }
-        public decimal closingbalance { get; set; }
-        public string CUSTOMERNAME { get; set; }
-        public string address { get; set; }
-        public string currency { get; set; }
+        public string cod_prod { get; set; }
+        public string cod_acct_no { get; set; }
+        public string bal_available { get; set; }
+        public string cod_cc_brn { get; set; }
     }
     public class BalanceEnquiryResponse2
     {

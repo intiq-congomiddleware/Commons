@@ -26,15 +26,24 @@ namespace BalanceEnquiry.Entities
             using (oralConnect)
             {
                 //Confirm if ther is phone number on this table
-                string query = $@"select * from {_appSettings.FlexSchema}.tbl_statement_summary where run_userid = :userId and accountno = :accountNumber";
+               string query = $@"select ACCOUNT_CLASS COD_PROD, CUST_AC_NO COD_ACCT_NO, acy_curr_balance,
+                              tod_limit+acy_curr_balance as BAL_AVAILABLE, BRANCH_CODE COD_CC_BRN
+                              from {_appSettings.FlexSchema}.sttm_cust_account where cust_ac_no = :accountNumber and record_stat = 'O' and tod_limit> 0
+                              and trunc(tod_limit_end_date) >= trunc(sysdate) ";
 
-                var b = await oralConnect.QueryAsync<BalanceEnquiryResponse>(query, new
+                var brs = await oralConnect.QueryAsync<BalanceEnquiryResponse>(query, new { request.accountNumber });
+
+                if (brs == null)
                 {
-                    request.accountNumber,
-                    request.userId
-                });
+                    string new_query = $@" SELECT ACCOUNT_CLASS COD_PROD, CUST_AC_NO COD_ACCT_NO,
+                                  nvl({_appSettings.FlexSchema}.GET_AC_CUST_DLY_CLOSING_BAL(:accountNumber, sysdate), 0)  BAL_AVAILABLE,
+                                  BRANCH_CODE COD_CC_BRN
+                                  FROM {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT  WHERE CUST_AC_NO = :accountNumber";
 
-                br = b.FirstOrDefault();
+                    brs = await oralConnect.QueryAsync<BalanceEnquiryResponse>(new_query, new { request.accountNumber });
+                }
+
+                br = brs.FirstOrDefault();
             }
             return br;
         }

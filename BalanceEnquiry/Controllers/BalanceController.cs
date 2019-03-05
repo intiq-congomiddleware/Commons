@@ -40,8 +40,6 @@ namespace BalanceEnquiry.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
 
-                request.userId = "SYSTEM";
-
                 b = await _orclRepo.GetBalanceEnquiry(request);
             }
             catch (Exception ex)
