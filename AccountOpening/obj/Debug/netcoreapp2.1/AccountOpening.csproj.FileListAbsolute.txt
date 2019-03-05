@@ -5,6 +5,7 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debu
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\AccountOpening.pdb
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\bin\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.csprojAssemblyReference.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.csproj.CoreCompileInputs.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.RazorAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountOpening\obj\Debug\netcoreapp2.1\AccountOpening.RazorAssemblyInfo.cs

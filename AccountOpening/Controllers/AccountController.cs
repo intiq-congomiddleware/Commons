@@ -71,9 +71,17 @@ namespace AccountOpening.Controllers
 
                         //Remove on go live
                         _logger.LogInformation($"MAINTENANCE_SEQ_NO : {tuple.Item2.MAINTENANCE_SEQ_NO} ACCOUNT_CLASS " +
-                            $": {request.ACCOUNT_CLASS} CustomerNo: {req.CUSTOMER_NO}");
+                            $": {request.ACCOUNT_CLASS} CustomerNo: {req.CUSTOMER_NO} CR_HO_LINE: {req.CR_HO_LINE} " +
+                            $"DR_HO_LINE: {req.DR_HO_LINE}");
 
                         request.CUSTOMER_NO = req.CUSTOMER_NO;
+                        request.DR_CB_LINE = req.DR_CB_LINE;
+                        request.CR_CB_LINE = req.CR_CB_LINE;
+                        request.CR_HO_LINE = req.CR_HO_LINE;
+                        request.DR_HO_LINE = req.DR_HO_LINE;
+                        request.DR_GL = req.DR_GL;
+                        req.CR_GL = req.CR_GL;
+
                         a.status = await CreateAccount(request, e);
                     }
                 }
