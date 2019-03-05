@@ -101,7 +101,8 @@ namespace AccountOpening.Controllers
                 {
                     req = await _orclRepo.GetCustomer(param, request.ACCOUNT_CLASS);
                 }
-                //Remove on go live
+
+                //Remove Debugger on go live
                 _logger.LogInformation($"MAINTENANCE_SEQ_NO : {param} ACCOUNT_CLASS " +
                     $": {request.ACCOUNT_CLASS} CustomerNo: {req.CUSTOMER_NO} CR_HO_LINE: {req.CR_HO_LINE} " +
                     $"DR_HO_LINE: {req.DR_HO_LINE}");
@@ -113,6 +114,8 @@ namespace AccountOpening.Controllers
                 request.DR_HO_LINE = req?.DR_HO_LINE;
                 request.DR_GL = req?.DR_GL;
                 request.CR_GL = req?.CR_GL;
+
+                e.SourceCode = "CUSTACC_UPLOAD";
 
                 u = Utility.GetAccount(request);
                 _logger.LogInformation("requested upload account");
