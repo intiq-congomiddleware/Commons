@@ -52,12 +52,12 @@ namespace AccountEnquiry.Controllers
         }
 
         [HttpPost("enquirybycustomerno")]
-        [ProducesResponseType(typeof(AccountEnquiryResponse), 201)]
+        [ProducesResponseType(typeof(List<AccountEnquiryResponse>), 201)]
         [ProducesResponseType(typeof(Response), 400)]
         [ProducesResponseType(typeof(Response), 500)]
         public async Task<IActionResult> enquirybycustomerno([FromBody] CustomerEnquiryRequest request)
         {
-            AccountEnquiryResponse b = new AccountEnquiryResponse();
+            List<AccountEnquiryResponse> b = new List<AccountEnquiryResponse>();
             try
             {
                 if (!ModelState.IsValid)
@@ -76,12 +76,12 @@ namespace AccountEnquiry.Controllers
         }
 
         [HttpPost("enquirybyphoneno")]
-        [ProducesResponseType(typeof(AccountEnquiryResponse), 201)]
+        [ProducesResponseType(typeof(List<AccountEnquiryResponse>), 201)]
         [ProducesResponseType(typeof(Response), 400)]
         [ProducesResponseType(typeof(Response), 500)]
         public async Task<IActionResult> enquirybyphoneno([FromBody] PhoneEnquiryRequest request)
         {
-            AccountEnquiryResponse b = new AccountEnquiryResponse();
+            List<AccountEnquiryResponse> b = new List<AccountEnquiryResponse>();
             try
             {
                 if (!ModelState.IsValid)

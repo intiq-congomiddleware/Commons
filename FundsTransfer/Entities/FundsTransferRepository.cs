@@ -39,11 +39,11 @@ namespace FundsTransfer.Entities
             return response;
         }
 
-        public async Task<FundsTransferResponse> ExecuteTransaction(FundsTransferRequest request)
+        public async Task<FundsTransferResponse> ExecuteTransaction(FundsTransferRequest request, string sproc)
         {
             FundsTransferResponse resp = new FundsTransferResponse();
 
-            string storeProcedure = $"{_appSettings.FlexSchema}.tme_postedtxn_proc";
+            string storeProcedure = $"{_appSettings.FlexSchema}.{sproc}";
 
             var oralConnect = new OracleConnection(_appSettings.FlexConnection);
 
@@ -68,12 +68,12 @@ namespace FundsTransfer.Entities
                 oralConnect.Open();
                 await oralConnect.ExecuteAsync(storeProcedure, param, commandType: CommandType.StoredProcedure);
 
-                resp.response_code = param.Get<string>("response_code");
-                resp.response_msg = param.Get<string>("response_msg");
+                resp.status = param.Get<string>("response_code");
+                resp.message = param.Get<string>("response_msg");
                 resp.actualtrnamt = param.Get<string>("actualtrnamt");
                 resp.rate = param.Get<string>("rate");
                 resp.trnrefno = request.trnrefno;
-                resp.response_code = resp.response_code.Trim();
+                resp.status = resp.status.Trim();
             }
 
             return resp;

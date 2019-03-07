@@ -3,7 +3,6 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netco
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netcoreapp2.1\Commons.runtimeconfig.dev.json
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\bin\Debug\netcoreapp2.1\Commons.pdb
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.csprojAssemblyReference.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.csproj.CoreCompileInputs.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.RazorAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.RazorAssemblyInfo.cs

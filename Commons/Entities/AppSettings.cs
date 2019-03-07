@@ -16,5 +16,7 @@ namespace Commons.Entities
         public string FlexConnection { get; set; }
         public string TMEConnection { get; set; }
         public string[] loggerModeOn { get; set; }
+        public string PaytSproc { get; set; }
+        public string ChrgsSproc { get; set; }
     }
 }

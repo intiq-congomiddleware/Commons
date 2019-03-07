@@ -47,9 +47,9 @@ namespace AccountEnquiry.Entities
             return ar;
         }
 
-        public async Task<AccountEnquiryResponse> GetAccountEnquiryByCustomerNumber(CustomerEnquiryRequest request)
+        public async Task<List<AccountEnquiryResponse>> GetAccountEnquiryByCustomerNumber(CustomerEnquiryRequest request)
         {
-            AccountEnquiryResponse ar = new AccountEnquiryResponse();
+            List<AccountEnquiryResponse> ar = new List<AccountEnquiryResponse>();
 
             var oralConnect = new OracleConnection(_appSettings.FlexConnection);
             using (oralConnect)
@@ -71,14 +71,14 @@ namespace AccountEnquiry.Entities
 
                 var ars = await oralConnect.QueryAsync<AccountEnquiryResponse>(query, new { request.customerNumber });
 
-                ar = ars.FirstOrDefault();
+                ar = ars.ToList();
             }
             return ar;
         }
 
-        public async Task<AccountEnquiryResponse> GetAccountEnquiryByPhoneNumber(PhoneEnquiryRequest request)
+        public async Task<List<AccountEnquiryResponse>> GetAccountEnquiryByPhoneNumber(PhoneEnquiryRequest request)
         {
-            AccountEnquiryResponse ar = new AccountEnquiryResponse();
+            List<AccountEnquiryResponse> ar = new List<AccountEnquiryResponse>();
 
             var oralConnect = new OracleConnection(_appSettings.FlexConnection);
             using (oralConnect)
@@ -100,7 +100,7 @@ namespace AccountEnquiry.Entities
 
                 var ars = await oralConnect.QueryAsync<AccountEnquiryResponse>(query, new { request.phoneNumber });
 
-                ar = ars.FirstOrDefault();
+                ar = ars.ToList();
             }
             return ar;
         }

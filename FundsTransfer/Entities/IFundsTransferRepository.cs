@@ -8,7 +8,7 @@ namespace FundsTransfer.Entities
     public interface IFundsTransferRepository
     {
         Task<bool> ValidateTransactionByRef(TransLog transLog);
-        Task<FundsTransferResponse> ExecuteTransaction(FundsTransferRequest request);
+        Task<FundsTransferResponse> ExecuteTransaction(FundsTransferRequest request, string sproc);
         Task<bool> UpdateTransactionResponse(FundsTransferResponse resp);
     }
 }

@@ -106,7 +106,7 @@ namespace AccountEnquiry
                 settings.PostProcess = document =>
                 {
                     document.Info.Version = "v1";
-                    document.Info.Title = "Balance Enquiry API";
+                    document.Info.Title = "Account Enquiry API";
                     document.Info.TermsOfService = "None";
                 };
                 settings.GeneratorSettings.OperationProcessors.Add(new OperationSecurityScopeProcessor("Authorization"));

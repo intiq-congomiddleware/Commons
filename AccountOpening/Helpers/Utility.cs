@@ -112,7 +112,7 @@ namespace AccountOpening.Helpers
             u.AC_STAT_STOP_PAY = "N";
             u.AC_STAT_DORMANT = "N";
             u.JOINT_AC_INDICATOR = "S";
-            u.AC_OPEN_DATE = DateTime.Parse("13-JAN-2019"); //DateTime.Parse(DateTime.Now.ToString("dd-MMM-yyyy"));// DateTime.Parse("11-JAN-2019"); //DateTime.Now;//23-JUL-2018
+            u.AC_OPEN_DATE = DateTime.Parse("23-JUL-2018"); //DateTime.Parse(DateTime.Now.ToString("dd-MMM-yyyy"));// DateTime.Parse("11-JAN-2019"); //DateTime.Now;//23-JUL-2018
             u.AC_STMT_DAY = 31;
             u.AC_STMT_CYCLE = "M";
             u.ACC_STMT_DAY2 = 31;
@@ -140,7 +140,7 @@ namespace AccountOpening.Helpers
             u.ACC_STATUS = "NORM";
             u.ACTION_CODE = "";
             u.INHERIT_REPORTING = "Y";
-            u.STATUS_SINCE = DateTime.Parse("13-JAN-2019"); // DateTime.Parse(DateTime.Now.ToString("dd-MMM-yyyy"));
+            u.STATUS_SINCE = DateTime.Parse("23-JUL-2018"); // DateTime.Parse(DateTime.Now.ToString("dd-MMM-yyyy"));
             u.TYPE_OF_CHQ = "C";
             u.GEN_STMT_ONLY_ON_MVMT = "N";
             u.AC_STAT_DE_POST = "Y";

@@ -8,7 +8,7 @@ namespace AccountEnquiry.Entities
     public interface IAccountEnquiryRepository
     {
         Task<AccountEnquiryResponse> GetAccountEnquiryByAccountNumber(AccountEnquiryRequest request);
-        Task<AccountEnquiryResponse> GetAccountEnquiryByCustomerNumber(CustomerEnquiryRequest request);
-        Task<AccountEnquiryResponse> GetAccountEnquiryByPhoneNumber(PhoneEnquiryRequest request);
+        Task<List<AccountEnquiryResponse>> GetAccountEnquiryByCustomerNumber(CustomerEnquiryRequest request);
+        Task<List<AccountEnquiryResponse>> GetAccountEnquiryByPhoneNumber(PhoneEnquiryRequest request);
     }
 }

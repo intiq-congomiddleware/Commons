@@ -39,14 +39,13 @@ namespace FundsTransfer.Helpers
             return result.ToString();
         }
 
-        public static bool FraudCheck(string creditAccount1, string creditAccount2, string creditAccount3,
-                                            string debitAccount, string amount1, string amount2, string amount3,
-                                            string referenceNo, string randomString, int transtype)
+        public static bool FraudCheck(FundsTransferRequest request)
         {
-            string r = RandomGeneratedStrings(creditAccount1, creditAccount2, creditAccount3,
-                debitAccount, amount1, amount2, amount3, referenceNo, transtype);
 
-            return r == randomString;
+            string r = RandomGeneratedStrings(request.cract, string.Empty, string.Empty,
+                request.dract, request.trnamt, string.Empty, string.Empty, request.trnrefno, request.trans_type);
+
+            return r == request.guid;
         }
 
         public static string RandomGeneratedStrings(string creditAccount1, string creditAccount2, string creditAccount3,

@@ -75,6 +75,9 @@ namespace FundsTransfer
                   };
               });
 
+            //Add AuthSettings
+            services.Configure<AuthSettings>(Configuration.GetSection("AuthSettings"));
+
             //Validators
             services.AddScoped<IValidator<FundsTransferRequest>, FundsTransferRequestValidator>();
 

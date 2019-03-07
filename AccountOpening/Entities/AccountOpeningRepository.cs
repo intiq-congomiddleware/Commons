@@ -237,7 +237,7 @@ namespace AccountOpening.Entities
                                  c.dr_gl,c.cr_gl,c.dr_cb_line,c.cr_cb_line,c.dr_ho_line,c.cr_ho_line,A.LOCAL_BRANCH
                                  from {_appSettings.FlexSchema}.STTM_CUSTOMER a
                                  left join {_appSettings.FlexSchema}.sttm_account_class_status c on  c.account_class = :acct_class
-                                 where a.CUSTOMER_NO = :seq_num AND c.status = 'NORM'";
+                                 where a.CUSTOMER_NO = :cust_num AND c.status = 'NORM'";
 
                 using (oralConnect)
                 {

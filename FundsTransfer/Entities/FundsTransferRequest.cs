@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +17,12 @@ namespace FundsTransfer.Entities
         public string product { get; set; }
         public string instr_code { get; set; }
         public string branch_code { get; set; }
+        [JsonIgnore]
         public string responseCode { get; set; }
         public string authorization { get; set; }
         public string user_name { get; set; }
         public string guid { get; set; }
+        public int trans_type { get; set; }
+        public bool with_charges { get; set; }
     }
 }

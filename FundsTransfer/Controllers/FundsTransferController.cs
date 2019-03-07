@@ -9,6 +9,7 @@ using FundsTransfer.Helpers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace FundsTransfer.Controllers
 {
@@ -22,11 +23,16 @@ namespace FundsTransfer.Controllers
     {
         private readonly ILogger<FundsTransferController> _logger;
         private readonly IFundsTransferRepository _orclRepo;
+        private readonly AuthSettings _authSettings;
+        private readonly AppSettings _appSettings;
 
-        public FundsTransferController(ILogger<FundsTransferController> logger, IFundsTransferRepository orclRepo)
+        public FundsTransferController(ILogger<FundsTransferController> logger, IFundsTransferRepository orclRepo
+            , IOptions<AuthSettings> authSettings, IOptions<AppSettings> appSettings)
         {
             _logger = logger;
             _orclRepo = orclRepo;
+            _authSettings = authSettings.Value;
+            _appSettings = appSettings.Value;
         }
 
         [HttpPost("transfer")]
@@ -36,26 +42,43 @@ namespace FundsTransfer.Controllers
         public async Task<IActionResult> transfer([FromBody] FundsTransferRequest request)
         {
             FundsTransferResponse resp = new FundsTransferResponse();
-          
+
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
 
-                TransLog tLog = Utility.GetTransLog(request);
+                request.trnrefno = $"{request.branch_code}{request.product}{request.l_acs_ccy}" +
+                    $"{Commons.Helpers.Utility.RandomString(6)}";
+                request.trans_type = 1;
 
-                if (await _orclRepo.ValidateTransactionByRef(tLog))
-                {
-                    resp = await _orclRepo.ExecuteTransaction(request);
-                }
+                //if (Utility.Authorization(request.authorization, _authSettings))
+                //{
+                //    if (Utility.FraudCheck(request))
+                //    {
+                        resp = await _orclRepo.ExecuteTransaction(request, _appSettings.PaytSproc);
 
-                if (resp.response_code.Trim() == "Y")
-                {
-                    resp.id = request.trnrefno;
-                    resp.trnrefno = request.trnrefno;
-                }
+                        if (resp.status.Trim() == "Y")
+                        {
+                            resp.id = request.trnrefno;
+                            resp.trnrefno = request.trnrefno;
 
-                await _orclRepo.UpdateTransactionResponse(resp);
+                            //if (request.with_charges)
+                            //    resp = await _orclRepo.ExecuteTransaction(request, _appSettings.ChrgsSproc);
+                        }
+                //    }
+                //    else
+                //    {
+                //        resp.status = "34";
+                //        resp.message = "Suspicious Transaction";
+                //    }
+                //}
+                //else
+                //{
+                //    _logger.LogInformation($"payment Request : {JsonHelper.toJson(request)} | Header authorization failed");
+                //    resp.status = "96";
+                //    resp.message = "Unauthorized";
+                //}
             }
             catch (Exception ex)
             {

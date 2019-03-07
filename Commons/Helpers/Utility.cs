@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Commons.Helpers
@@ -78,6 +80,28 @@ namespace Commons.Helpers
                 Console.WriteLine("GetReferenceNo", ex.Message + "" + ex.StackTrace, "");
             }
             return rand;
+        }
+
+        public static string RandomString(int length)
+        {
+            char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[1];
+
+            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetNonZeroBytes(data);
+                data = new byte[length];
+                crypto.GetNonZeroBytes(data);
+            }
+
+            StringBuilder result = new StringBuilder(length);
+
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length)]);
+            }
+
+            return result.ToString();
         }
     }
 }
