@@ -251,6 +251,30 @@ namespace AccountOpening.Entities
 
             return customer.FirstOrDefault();
         }
+
+        public async Task<AccountOpeningResponse> GetAccountOpeningResponse(string seq_num)
+        {
+            IEnumerable<AccountOpeningResponse> account = new List<AccountOpeningResponse>();
+            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            try
+            {
+                string query = $@"SELECT * FROM (select a.customer_no CUSTOMER_NO, b.cust_ac_no ACCOUNT_NO, B.AC_DESC CUSTOMER_NAME,
+                                  B.BRANCH_CODE from {_appSettings.FlexSchema}.sttm_customer A inner join {_appSettings.FlexSchema}.sttb_upload_cust_account c 
+                                  on a.customer_no=c.cust_no inner join fccuat.sttm_cust_account b on a.customer_no=b.cust_no 
+                                  where maintenance_seq_no = :seq_num ORDER BY B.AC_OPEN_DATE DESC) WHERE ROWNUM < 2";
+
+                using (oralConnect)
+                {
+                    account = await oralConnect.QueryAsync<AccountOpeningResponse>(query, new { seq_num });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return account.FirstOrDefault();
+        }
     }
 }
 

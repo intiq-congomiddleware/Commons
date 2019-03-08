@@ -31,12 +31,12 @@ namespace AccountOpening.Controllers
         }
 
         [HttpPost("create")]
-        [ProducesResponseType(typeof(Response), 200)]
+        [ProducesResponseType(typeof(AccountOpeningResponse), 200)]
         [ProducesResponseType(typeof(Response), 400)]
         [ProducesResponseType(typeof(Response), 500)]
         public async Task<IActionResult> create([FromBody] AccountOpeningRequest request)
         {
-            Response a = new Response();
+            AccountOpeningResponse aor = new AccountOpeningResponse();
             List<string> messages = new List<string>();
             ExecuteCustomer e = new ExecuteCustomer()
             {
@@ -57,7 +57,7 @@ namespace AccountOpening.Controllers
 
                     if (customerExists)
                     {
-                        a.status = await CreateAccount(request, e, request.CUSTOMER_NO);
+                        aor = await CreateAccount(request, e, request.CUSTOMER_NO);
                     }
                 }
                 else
@@ -66,11 +66,11 @@ namespace AccountOpening.Controllers
 
                     if (tuple.Item1)
                     {
-                        a.status = await CreateAccount(request, e, tuple.Item2.MAINTENANCE_SEQ_NO);
+                        aor = await CreateAccount(request, e, tuple.Item2.MAINTENANCE_SEQ_NO);
                     }
                 }
 
-                a.message = (a.status) ? "Account Created Successfully" : "Account Creation Failed";
+                //a.message = (a.status) ? "Account Created Successfully" : "Account Creation Failed";
             }
             catch (Exception ex)
             {
@@ -78,16 +78,17 @@ namespace AccountOpening.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, Commons.Helpers.Utility.GetResponse(ex));
             }
 
-            return CreatedAtAction("create", a);
+            return CreatedAtAction("create", aor);
         }
 
-        private async Task<bool> CreateAccount(AccountOpeningRequest request, ExecuteCustomer e, string param)
+        private async Task<AccountOpeningResponse> CreateAccount(AccountOpeningRequest request, ExecuteCustomer e, string param)
         {
             bool isAccountAdded = false;
             bool isAccountExecuted = false;
 
             Account u = new Account();
             AccountOpeningRequest req = null;
+            AccountOpeningResponse res = new AccountOpeningResponse();
 
             try
             {
@@ -133,7 +134,19 @@ namespace AccountOpening.Controllers
                 _logger.LogError(ex.ToString());
             }
 
-            return isAccountAdded && isAccountExecuted;
+            if (isAccountAdded && isAccountExecuted)
+            {
+                try
+                {
+                    res = await _orclRepo.GetAccountOpeningResponse(u.MAINTENANCE_SEQ_NO);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.ToString());
+                }
+            }
+
+            return res;
         }
 
         private async Task<Tuple<bool, Customer>> CreateCustomer(AccountOpeningRequest request, ExecuteCustomer e)
