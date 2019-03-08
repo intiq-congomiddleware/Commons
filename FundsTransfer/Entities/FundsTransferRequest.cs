@@ -13,6 +13,7 @@ namespace FundsTransfer.Entities
         public string cract1 { get; set; }
         public string cract2 { get; set; }
         public string trnamt { get; set; }
+        public string trnamt1 { get; set; }
         public string prate { get; set; }
         public string trnrefno { get; set; }
         public string l_acs_ccy { get; set; }
@@ -27,5 +28,6 @@ namespace FundsTransfer.Entities
         public string guid { get; set; }
         public int trans_type { get; set; }
         public bool with_charges { get; set; }
+        public bool is_own_account { get; set; }
     }
 }

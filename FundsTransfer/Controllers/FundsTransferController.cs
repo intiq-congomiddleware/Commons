@@ -52,6 +52,11 @@ namespace FundsTransfer.Controllers
                     $"{Commons.Helpers.Utility.RandomString(6)}";
                 request.trans_type = 1;
 
+                if (request.is_own_account && !await _orclRepo.IsOwnAccount(request))
+                    return StatusCode((int)HttpStatusCode.BadRequest, 
+                        Commons.Helpers.Utility.GetResponse("Accounts might not be linked to same Customer.", HttpStatusCode.BadRequest));
+
+
                 //if (Utility.Authorization(request.authorization, _authSettings))
                 //{
                 //    if (Utility.FraudCheck(request))

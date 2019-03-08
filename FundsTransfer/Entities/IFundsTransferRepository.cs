@@ -10,5 +10,6 @@ namespace FundsTransfer.Entities
         Task<bool> ValidateTransactionByRef(TransLog transLog);
         Task<FundsTransferResponse> ExecuteTransaction(FundsTransferRequest request, string sproc);
         Task<bool> UpdateTransactionResponse(FundsTransferResponse resp);
+        Task<bool> IsOwnAccount(FundsTransferRequest request);
     }
 }

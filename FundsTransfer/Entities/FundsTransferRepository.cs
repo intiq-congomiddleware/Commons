@@ -49,14 +49,15 @@ namespace FundsTransfer.Entities
 
             var param = new DynamicParameters();
             param.Add("dract", request.dract.Trim());
-            param.Add("cract", request.cract.Trim());
-            param.Add("cract1", request.cract1.Trim());
-            param.Add("cract2", request.cract2.Trim());
+            if (!request.with_charges) param.Add("cract", request.cract?.Trim());
+            if (request.with_charges) param.Add("cract1", request.cract1?.Trim());
+            if (request.with_charges) param.Add("cract2", request.cract2?.Trim());
             param.Add("trnamt", request.trnamt.Trim());
+            if (request.with_charges) param.Add("trnamt1", request.trnamt1.Trim());
             param.Add("trnrefno", request.trnrefno.Trim());
             param.Add("l_acs_ccy", request.l_acs_ccy.Trim());
             param.Add("txnnarra", request.txnnarra);
-            param.Add("prate", request.prate.Trim());
+            //if (request.with_charges) param.Add("prate", request.prate?.Trim());
             param.Add("product", request.product.Trim());
             param.Add("instr_code", request.instr_code.Trim());
             param.Add("branch_code", request.branch_code.Trim());
@@ -96,6 +97,32 @@ namespace FundsTransfer.Entities
 
                 var r = await oralConnect.ExecuteAsync(query, resp);
                 response = r > 0;
+            }
+
+            return response;
+        }
+
+        public async Task<bool> IsOwnAccount(FundsTransferRequest request)
+        {
+            bool response = false;
+
+            var oralConnect = new OracleConnection(_appSettings.TMEConnection);
+            try
+            {
+                using (oralConnect)
+                {
+                    string query = $@"SELECT A.* FROM FCCUAT.STTM_CUST_ACCOUNT A INNER JOIN FCCUAT.STTM_CUST_ACCOUNT B ON A.CUST_NO = B.CUST_NO
+                                WHERE A.CUST_AC_NO = :dract AND B.CUST_AC_NO = :cract";
+
+                    var r = await oralConnect.QueryAsync<string>(query, new { request.dract, request.cract });
+
+                    response = r != null && r.Count() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
             }
 
             return response;
