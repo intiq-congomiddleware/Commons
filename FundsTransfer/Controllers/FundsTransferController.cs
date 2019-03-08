@@ -56,16 +56,18 @@ namespace FundsTransfer.Controllers
                 //{
                 //    if (Utility.FraudCheck(request))
                 //    {
-                        resp = await _orclRepo.ExecuteTransaction(request, _appSettings.PaytSproc);
 
-                        if (resp.status.Trim() == "Y")
-                        {
-                            resp.id = request.trnrefno;
-                            resp.trnrefno = request.trnrefno;
+                string sproc = (request.with_charges) ? _appSettings.ChrgsSproc : _appSettings.PaytSproc;
 
-                            //if (request.with_charges)
-                            //    resp = await _orclRepo.ExecuteTransaction(request, _appSettings.ChrgsSproc);
-                        }
+                resp = await _orclRepo.ExecuteTransaction(request, sproc);
+
+                if (resp.status.Trim() == "Y")
+                {
+                    resp.id = request.trnrefno;
+                    resp.trnrefno = request.trnrefno;
+                }
+
+                //}
                 //    }
                 //    else
                 //    {

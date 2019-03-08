@@ -50,10 +50,13 @@ namespace FundsTransfer.Entities
             var param = new DynamicParameters();
             param.Add("dract", request.dract.Trim());
             param.Add("cract", request.cract.Trim());
+            param.Add("cract1", request.cract1.Trim());
+            param.Add("cract2", request.cract2.Trim());
             param.Add("trnamt", request.trnamt.Trim());
             param.Add("trnrefno", request.trnrefno.Trim());
             param.Add("l_acs_ccy", request.l_acs_ccy.Trim());
             param.Add("txnnarra", request.txnnarra);
+            param.Add("prate", request.prate.Trim());
             param.Add("product", request.product.Trim());
             param.Add("instr_code", request.instr_code.Trim());
             param.Add("branch_code", request.branch_code.Trim());
