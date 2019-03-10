@@ -14,3 +14,4 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug\netcoreapp2.1\FundsTransfer.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug\netcoreapp2.1\FundsTransfer.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug\netcoreapp2.1\FundsTransfer.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug\netcoreapp2.1\FundsTransfer.csprojAssemblyReference.cache
