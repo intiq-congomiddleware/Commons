@@ -11,5 +11,6 @@ namespace FundsTransfer.Entities
         Task<FundsTransferResponse> ExecuteTransaction(FundsTransferRequest request, string sproc);
         Task<bool> UpdateTransactionResponse(FundsTransferResponse resp);
         Task<bool> IsOwnAccount(FundsTransferRequest request);
+        Task<AccountEnquiryResponse> GetAccountEnquiryByAccountNumber(AccountEnquiryRequest request);
     }
 }

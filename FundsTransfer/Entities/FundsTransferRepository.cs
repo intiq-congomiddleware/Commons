@@ -52,8 +52,8 @@ namespace FundsTransfer.Entities
             if (!request.with_charges) param.Add("cract", request.cract?.Trim());
             if (request.with_charges) param.Add("cract1", request.cract1?.Trim());
             if (request.with_charges) param.Add("cract2", request.cract2?.Trim());
-            param.Add("trnamt", request.trnamt.Trim());
-            if (request.with_charges) param.Add("trnamt1", request.trnamt1.Trim());
+            param.Add("trnamt", request.trnamt);
+            if (request.with_charges) param.Add("trnamt1", request.trnamt1);
             param.Add("trnrefno", request.trnrefno.Trim());
             param.Add("l_acs_ccy", request.l_acs_ccy.Trim());
             param.Add("txnnarra", request.txnnarra);
@@ -126,6 +126,35 @@ namespace FundsTransfer.Entities
             }
 
             return response;
+        }
+
+        public async Task<AccountEnquiryResponse> GetAccountEnquiryByAccountNumber(AccountEnquiryRequest request)
+        {
+            AccountEnquiryResponse ar = new AccountEnquiryResponse();
+
+            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            using (oralConnect)
+            {
+                string query = $@"SELECT LPAD(A.BRANCH_CODE,3,0) COD_CC_BRN, A.CUST_AC_NO COD_ACCT_NO, A.AC_DESC COD_ACCT_TITLE,
+                                  DECODE(C.ACCOUNT_CLASS,'222','S',C.ac_class_type) ACCOUNT_TYPE,
+                                  A.CCY NAM_CCY_SHORT, A.AC_OPEN_DATE DAT_ACCT_OPEN, A.CUST_NO COD_CUST,A.AC_STAT_NO_DR, A.AC_STAT_NO_CR,
+                                  A.AC_STAT_BLOCK, A.AC_STAT_STOP_PAY, A.AC_STAT_DORMANT, A.AC_STAT_FROZEN, A.ACCOUNT_CLASS COD_PROD,
+                                  A.AC_STAT_DE_POST,C.description ACCOUNTDESC, BR.branch_name BRANCH,
+                                  A.ACY_AVL_BAL BAL_AVAILABLE, Y.DATE_OF_BIRTH,DECODE(B.CUSTOMER_TYPE,'C','CORPORATE','I','INDIVIDUAL') CUSTOMER_CATEGORY
+                                  FROM {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT A
+                                  INNER JOIN {_appSettings.FlexSchema}.STTM_CUSTOMER B ON B.CUSTOMER_NO = A.CUST_NO
+                                  LEFT OUTER JOIN {_appSettings.FlexSchema}.STTM_CUST_PERSONAL Y ON Y.CUSTOMER_NO = A.CUST_NO
+                                  LEFT OUTER JOIN {_appSettings.FlexSchema}.MITB_CLASS_MAPPING D ON D.UNIT_REF_NO = A.CUST_AC_NO 
+                                  LEFT OUTER JOIN {_appSettings.FlexSchema}.STTM_CUST_CORPORATE Z ON Z.CUSTOMER_NO=A.CUST_NO
+                                  LEFT OUTER JOIN {_appSettings.FlexSchema}.STTM_ACCOUNT_CLASS C ON C.account_class = A.account_class 
+                                  LEFT OUTER JOIN {_appSettings.FlexSchema}.STTM_BRANCH BR ON BR.branch_code = A.branch_code
+                                  WHERE A.CUST_AC_NO in (:accountNumber)";
+
+                var ars = await oralConnect.QueryAsync<AccountEnquiryResponse>(query, new { request.accountNumber });
+
+                ar = ars.FirstOrDefault();
+            }
+            return ar;
         }
     }
 }

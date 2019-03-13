@@ -11,6 +11,10 @@ namespace BalanceEnquiry.Validators
     {
         public AccountEnquiryRequestValidator()
         {
+            RuleFor(req => req.accountNumber)
+                .NotNull()
+                .NotEmpty()
+                .MaximumLength(10);
         }
     }
 }

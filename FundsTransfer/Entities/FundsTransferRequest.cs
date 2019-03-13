@@ -12,9 +12,9 @@ namespace FundsTransfer.Entities
         public string cract { get; set; }
         public string cract1 { get; set; }
         public string cract2 { get; set; }
-        public string trnamt { get; set; }
-        public string trnamt1 { get; set; }
-        public string prate { get; set; }
+        public decimal trnamt { get; set; }
+        public decimal trnamt1 { get; set; }
+        public decimal prate { get; set; }
         public string trnrefno { get; set; }
         public string l_acs_ccy { get; set; }
         public string txnnarra { get; set; }

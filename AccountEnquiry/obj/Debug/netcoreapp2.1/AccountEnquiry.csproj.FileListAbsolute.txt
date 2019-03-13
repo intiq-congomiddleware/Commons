@@ -22,6 +22,7 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\bin\Debu
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\bin\Debug\netcoreapp2.1\AccountEnquiry.pdb
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\bin\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debug\netcoreapp2.1\AccountEnquiry.csprojAssemblyReference.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debug\netcoreapp2.1\AccountEnquiry.csproj.CoreCompileInputs.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debug\netcoreapp2.1\AccountEnquiry.RazorAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debug\netcoreapp2.1\AccountEnquiry.RazorAssemblyInfo.cs

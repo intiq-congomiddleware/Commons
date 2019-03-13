@@ -14,4 +14,3 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debu
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.pdb
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.csprojAssemblyReference.cache

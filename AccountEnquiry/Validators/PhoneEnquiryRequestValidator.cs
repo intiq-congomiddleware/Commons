@@ -11,6 +11,10 @@ namespace AccountEnquiry.Validators
     {
         public PhoneEnquiryRequestValidator()
         {
+            RuleFor(req => req.phoneNumber)
+                .NotNull()
+                .NotEmpty()
+                .MaximumLength(20);
         }
     }
 }

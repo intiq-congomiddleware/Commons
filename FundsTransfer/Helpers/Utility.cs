@@ -43,7 +43,7 @@ namespace FundsTransfer.Helpers
         {
 
             string r = RandomGeneratedStrings(request.cract, string.Empty, string.Empty,
-                request.dract, request.trnamt, string.Empty, string.Empty, request.trnrefno, request.trans_type);
+                request.dract, request.trnamt.ToString(), string.Empty, string.Empty, request.trnrefno, request.trans_type);
 
             return r == request.guid;
         }
@@ -121,7 +121,7 @@ namespace FundsTransfer.Helpers
                 creditaccount = request.cract,
                 debitaccount = request.dract,
                 debit_branch = request.branch_code,
-                post_amt = request.trnamt,
+                post_amt = request.trnamt.ToString(),
                 refno = request.trnrefno
             };
         }

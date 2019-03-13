@@ -42,6 +42,7 @@ namespace FundsTransfer.Controllers
         public async Task<IActionResult> transfer([FromBody] FundsTransferRequest request)
         {
             FundsTransferResponse resp = new FundsTransferResponse();
+            AccountEnquiryResponse aresp = new AccountEnquiryResponse();
 
             try
             {
@@ -54,8 +55,29 @@ namespace FundsTransfer.Controllers
 
                 if (request.is_own_account && !await _orclRepo.IsOwnAccount(request))
                     return StatusCode((int)HttpStatusCode.BadRequest, 
-                        Commons.Helpers.Utility.GetResponse("Accounts might not be linked to same Customer.", HttpStatusCode.BadRequest));
+                        Commons.Helpers.Utility.GetResponse(Constant.ACCOUNT_NOT_LINKED, HttpStatusCode.BadRequest));
 
+                if (!string.IsNullOrEmpty(request.cract))
+                {
+                    aresp = await _orclRepo.GetAccountEnquiryByAccountNumber(new AccountEnquiryRequest() { accountNumber = request.cract });
+                 
+                    if (aresp?.ac_stat_no_cr?.ToUpper().Trim() != "Y")
+                    {
+                        return StatusCode((int)HttpStatusCode.BadRequest, 
+                            Commons.Helpers.Utility.GetResponse(Constant.STAT_NO_CR, HttpStatusCode.BadRequest));
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(request.dract))
+                {
+                    aresp = await _orclRepo.GetAccountEnquiryByAccountNumber(new AccountEnquiryRequest() { accountNumber = request.dract });
+
+                    if (aresp?.ac_stat_no_dr?.ToUpper().Trim() != "Y")
+                    {
+                        return StatusCode((int)HttpStatusCode.BadRequest,
+                            Commons.Helpers.Utility.GetResponse(Constant.STAT_NO_DR, HttpStatusCode.BadRequest));
+                    }
+                }
 
                 //if (Utility.Authorization(request.authorization, _authSettings))
                 //{
@@ -66,7 +88,7 @@ namespace FundsTransfer.Controllers
 
                 resp = await _orclRepo.ExecuteTransaction(request, sproc);
 
-                if (resp.status.Trim() == "Y")
+                if (resp.status?.ToUpper().Trim() == "Y")
                 {
                     resp.id = request.trnrefno;
                     resp.trnrefno = request.trnrefno;
