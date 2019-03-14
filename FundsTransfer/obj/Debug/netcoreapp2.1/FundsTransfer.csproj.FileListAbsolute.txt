@@ -5,6 +5,7 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\bin\Debug
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\bin\Debug\netcoreapp2.1\FundsTransfer.pdb
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\bin\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug\netcoreapp2.1\FundsTransfer.csprojAssemblyReference.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug\netcoreapp2.1\FundsTransfer.csproj.CoreCompileInputs.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug\netcoreapp2.1\FundsTransfer.RazorAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\FundsTransfer\obj\Debug\netcoreapp2.1\FundsTransfer.RazorAssemblyInfo.cs

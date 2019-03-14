@@ -57,25 +57,31 @@ namespace FundsTransfer.Controllers
                     return StatusCode((int)HttpStatusCode.BadRequest, 
                         Commons.Helpers.Utility.GetResponse(Constant.ACCOUNT_NOT_LINKED, HttpStatusCode.BadRequest));
 
-                if (!string.IsNullOrEmpty(request.cract))
+                if (!string.IsNullOrEmpty(request.cract) && request.cract.Length != 9)
                 {
                     aresp = await _orclRepo.GetAccountEnquiryByAccountNumber(new AccountEnquiryRequest() { accountNumber = request.cract });
                  
-                    if (aresp?.ac_stat_no_cr?.ToUpper().Trim() != "Y")
+                    if (aresp?.ac_stat_no_cr?.ToUpper().Trim() != "N")
                     {
                         return StatusCode((int)HttpStatusCode.BadRequest, 
                             Commons.Helpers.Utility.GetResponse(Constant.STAT_NO_CR, HttpStatusCode.BadRequest));
                     }
                 }
 
-                if (!string.IsNullOrEmpty(request.dract))
+                if (!string.IsNullOrEmpty(request.dract) && request.dract.Length != 9)
                 {
                     aresp = await _orclRepo.GetAccountEnquiryByAccountNumber(new AccountEnquiryRequest() { accountNumber = request.dract });
 
-                    if (aresp?.ac_stat_no_dr?.ToUpper().Trim() != "Y")
+                    if (aresp?.ac_stat_no_dr?.ToUpper().Trim() != "N")
                     {
                         return StatusCode((int)HttpStatusCode.BadRequest,
                             Commons.Helpers.Utility.GetResponse(Constant.STAT_NO_DR, HttpStatusCode.BadRequest));
+                    }
+
+                    if (aresp?.ac_stat_dormant?.ToUpper().Trim() != "N")
+                    {
+                        return StatusCode((int)HttpStatusCode.BadRequest,
+                            Commons.Helpers.Utility.GetResponse(Constant.STAT_DORMANT, HttpStatusCode.BadRequest));
                     }
                 }
 
