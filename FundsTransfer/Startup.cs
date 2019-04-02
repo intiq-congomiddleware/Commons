@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using FundsTransfer.Entities;
 using FundsTransfer.Validators;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -80,6 +82,9 @@ namespace FundsTransfer
 
             //Validators
             services.AddScoped<IValidator<FundsTransferRequest>, FundsTransferRequestValidator>();
+
+            services.AddDataProtection()
+                      .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Server\Share\Keys\"));
 
             //Oracle  Repositories
             services.AddScoped<IFundsTransferRepository, FundsTransferRepository>();

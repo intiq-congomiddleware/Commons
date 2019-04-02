@@ -14,7 +14,7 @@ namespace BalanceEnquiry.Validators
             RuleFor(req => req.accountNumber)
                 .NotNull()
                 .NotEmpty()
-                .MaximumLength(10);
+                .MaximumLength(15);
         }
     }
 }

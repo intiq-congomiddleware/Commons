@@ -7,23 +7,27 @@ using Dapper;
 using Commons.Entities;
 using Microsoft.Extensions.Options;
 using Oracle.ManagedDataAccess.Client;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace AccountOpening.Entities
 {
     public class AccountOpeningRepository : IAccountOpeningRepository
     {
         private readonly AppSettings _appSettings;
+        //private readonly IDataProtectionProvider _provider;
+        private IDataProtector _protector;
 
-        public AccountOpeningRepository(IOptions<AppSettings> appSettings)
+        public AccountOpeningRepository(IOptions<AppSettings> appSettings, IDataProtectionProvider provider)
         {
             _appSettings = appSettings.Value;
+            _protector = provider.CreateProtector("treyryug");
         }
 
         public async Task<bool> AddCustomer(Personal p, Customer uc)
         {
             int rowAffected = 0;
 
-            using (IDbConnection oralConnect = new OracleConnection(_appSettings.FlexConnection))
+            using (IDbConnection oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection)))
             {
                 oralConnect.Open();
                 IDbTransaction transaction = oralConnect.BeginTransaction(IsolationLevel.ReadCommitted);
@@ -62,7 +66,7 @@ namespace AccountOpening.Entities
 
         public async Task<bool> ExecuteNewCustomer(ExecuteCustomer executeCustomer)
         {
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             string query = $@"DECLARE
                                       l_source_code           {_appSettings.FlexSchema}.cotms_source.source_code%TYPE := :SourceCode  ;
                                       l_branch_code           {_appSettings.FlexSchema}.sttm_branch.branch_code%TYPE  := :BranchCode  ;
@@ -99,8 +103,9 @@ namespace AccountOpening.Entities
 
         public async Task<bool> CustomerExist(string customerNo)
         {
+            //EncData();
             IEnumerable<CustomerNo> customer = new List<CustomerNo>();
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             try
             {
                 string query = $@"select * from {_appSettings.FlexSchema}.sttm_customer where customer_no=:customerNo AND record_stat='O'";
@@ -121,7 +126,7 @@ namespace AccountOpening.Entities
         public async Task<bool> AddAccount(Account a)
         {
             int r = 0;
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             using (oralConnect)
             {
                 string queryAccount = $@"INSERT INTO {_appSettings.FlexSchema}.STTB_UPLOAD_CUST_ACCOUNT (MAINTENANCE_SEQ_NO,SOURCE_CODE,BRANCH_CODE,CUST_AC_NO,AC_DESC,CUST_NO,CCY,
@@ -169,7 +174,7 @@ namespace AccountOpening.Entities
 
         public async Task<bool> ExecuteNewAccount(ExecuteCustomer executeCustomer)
         {
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             string query = $@"DECLARE
                                    l_source_code           {_appSettings.FlexSchema}.cotms_source.source_code%TYPE := :SourceCode ;
                                    l_branch_code           {_appSettings.FlexSchema}.sttm_branch.branch_code%TYPE  := :BranchCode ;
@@ -203,7 +208,7 @@ namespace AccountOpening.Entities
         public async Task<AccountOpeningRequest> GetCustomer(string seq_num, string acct_class)
         {
             IEnumerable<AccountOpeningRequest> customer = new List<AccountOpeningRequest>();
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             try
             {
                 string query = $@"select a.*, c.account_class,a.customer_name1 customer_name,
@@ -229,7 +234,7 @@ namespace AccountOpening.Entities
         public async Task<AccountOpeningRequest> GetCustomerByNumber(string cust_num, string acct_class)
         {
             IEnumerable<AccountOpeningRequest> customer = new List<AccountOpeningRequest>();
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             try
             {
                 string query = $@"select a.*, c.account_class,a.customer_name1 customer_name,
@@ -255,7 +260,7 @@ namespace AccountOpening.Entities
         public async Task<AccountOpeningResponse> GetAccountOpeningResponse(string seq_num)
         {
             IEnumerable<AccountOpeningResponse> account = new List<AccountOpeningResponse>();
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             try
             {
                 string query = $@"SELECT * FROM (select a.customer_no CUSTOMER_NO, b.cust_ac_no ACCOUNT_NO, B.AC_DESC CUSTOMER_NAME,
@@ -274,7 +279,7 @@ namespace AccountOpening.Entities
             }
 
             return account.FirstOrDefault();
-        }
+        }       
     }
 }
 

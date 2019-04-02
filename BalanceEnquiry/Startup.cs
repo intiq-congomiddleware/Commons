@@ -23,6 +23,8 @@ using NJsonSchema;
 using NSwag.AspNetCore;
 using NSwag.SwaggerGeneration.Processors.Security;
 using Serilog;
+using Microsoft.AspNetCore.DataProtection;
+using System.IO;
 
 namespace BalanceEnquiry
 {
@@ -77,6 +79,9 @@ namespace BalanceEnquiry
 
             //Validators
             services.AddScoped<IValidator<BalanceEnquiryRequest>, BalanceEnquiryRequestValidator>();
+
+            services.AddDataProtection()
+                      .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Server\Share\Keys\"));
 
             //Oracle  Repositories
             services.AddScoped<IBalanceEnquiryRepository, BalanceEnquiryRepository>();         

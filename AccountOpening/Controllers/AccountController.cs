@@ -34,7 +34,7 @@ namespace AccountOpening.Controllers
         [ProducesResponseType(typeof(AccountOpeningResponse), 200)]
         [ProducesResponseType(typeof(Response), 400)]
         [ProducesResponseType(typeof(Response), 500)]
-        public async Task<IActionResult> create([FromBody] AccountOpeningRequest request)
+        public async Task<IActionResult> create([FromBody] AccountOpeningRequest request, bool customerOnly = false)
         {
             AccountOpeningResponse aor = new AccountOpeningResponse();
             List<string> messages = new List<string>();
@@ -66,11 +66,12 @@ namespace AccountOpening.Controllers
 
                     if (tuple.Item1)
                     {
+                        if (customerOnly)
+                            return CreatedAtAction("create", await _orclRepo.GetAccountOpeningResponse(tuple.Item2.MAINTENANCE_SEQ_NO));
+
                         aor = await CreateAccount(request, e, tuple.Item2.MAINTENANCE_SEQ_NO);
                     }
                 }
-
-                //a.message = (a.status) ? "Account Created Successfully" : "Account Creation Failed";
             }
             catch (Exception ex)
             {

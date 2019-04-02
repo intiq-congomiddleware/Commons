@@ -31,3 +31,4 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debu
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debug\netcoreapp2.1\AccountEnquiry.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debug\netcoreapp2.1\AccountEnquiry.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debug\netcoreapp2.1\AccountEnquiry.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\AccountEnquiry\obj\Debug\netcoreapp2.1\AccountEnquiry.csprojAssemblyReference.cache

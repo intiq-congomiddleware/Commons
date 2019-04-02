@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Commons.Entities;
 using Dapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using Oracle.ManagedDataAccess.Client;
 
@@ -13,17 +14,20 @@ namespace FundsTransfer.Entities
     public class FundsTransferRepository : IFundsTransferRepository
     {
         private readonly AppSettings _appSettings;
+        //private readonly IDataProtectionProvider _provider;
+        private IDataProtector _protector;
 
-        public FundsTransferRepository(IOptions<AppSettings> appSettings)
+        public FundsTransferRepository(IOptions<AppSettings> appSettings, IDataProtectionProvider provider)
         {
             _appSettings = appSettings.Value;
+            _protector = provider.CreateProtector("treyryug");
         }
 
         public async Task<bool> ValidateTransactionByRef(TransLog transLog)
         {
             bool response = false;
 
-            var oralConnect = new OracleConnection(_appSettings.TMEConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.TMEConnection));
 
             using (oralConnect)
             {
@@ -45,7 +49,7 @@ namespace FundsTransfer.Entities
 
             string storeProcedure = $"{_appSettings.FlexSchema}.{sproc}";
 
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
 
             var param = new DynamicParameters();
             param.Add("dract", request.dract.Trim());
@@ -87,7 +91,7 @@ namespace FundsTransfer.Entities
         {
             bool response = false;
 
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             using (oralConnect)
             {
                 string query = $@" Update {_appSettings.FlexSchema}.tme_postedtxn set transactionreference =:trnrefno, 
@@ -106,7 +110,7 @@ namespace FundsTransfer.Entities
         {
             bool response = false;
 
-            var oralConnect = new OracleConnection(_appSettings.TMEConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.TMEConnection));
             try
             {
                 using (oralConnect)
@@ -132,7 +136,7 @@ namespace FundsTransfer.Entities
         {
             AccountEnquiryResponse ar = new AccountEnquiryResponse();
 
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             using (oralConnect)
             {
                 string query = $@"SELECT LPAD(A.BRANCH_CODE,3,0) COD_CC_BRN, A.CUST_AC_NO COD_ACCT_NO, A.AC_DESC COD_ACCT_TITLE,
@@ -155,6 +159,22 @@ namespace FundsTransfer.Entities
                 ar = ars.FirstOrDefault();
             }
             return ar;
+        }
+
+        public string EncData()
+        {
+            string tmeconn = "";
+            string flexconn = "";
+            try
+            {
+                tmeconn = _protector.Protect("");
+                flexconn = _protector.Protect("");
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return flexconn;
         }
     }
 }
