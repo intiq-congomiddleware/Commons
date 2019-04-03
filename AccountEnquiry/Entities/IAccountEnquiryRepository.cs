@@ -10,5 +10,6 @@ namespace AccountEnquiry.Entities
         Task<AccountEnquiryResponse> GetAccountEnquiryByAccountNumber(AccountEnquiryRequest request);
         Task<List<AccountEnquiryResponse>> GetAccountEnquiryByCustomerNumber(CustomerEnquiryRequest request);
         Task<List<AccountEnquiryResponse>> GetAccountEnquiryByPhoneNumber(PhoneEnquiryRequest request);
+        string EncData(string value);
     }
 }

@@ -185,5 +185,14 @@ namespace AccountOpening.Controllers
 
             return new Tuple<bool, Customer>(isCustomerAdded && isCustomerExecuted, c);
         }
+
+        [HttpGet("encdata/{value}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(Response), 400)]
+        [ProducesResponseType(typeof(Response), 500)]
+        public async Task<IActionResult> encdata(string value)
+        {
+            return Ok(_orclRepo.EncData(value));
+        }
     }
 }

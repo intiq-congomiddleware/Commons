@@ -52,7 +52,21 @@ namespace BalanceEnquiry.Entities
                 br = brs.FirstOrDefault();
             }
             return br;
-        }        
+        }
+
+        public string EncData(string value)
+        {
+            string output = string.Empty;
+            try
+            {
+                output = _protector.Protect(value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return output;
+        }
     }
 }
 

@@ -16,5 +16,6 @@ namespace AccountOpening.Entities
         Task<bool> ExecuteNewAccount(ExecuteCustomer executeCustomer);
         Task<AccountOpeningRequest> GetCustomer(string seq_num, string acct_class);
         Task<AccountOpeningRequest> GetCustomerByNumber(string cust_num, string acct_class);
+        string EncData(string value);
     }
 }

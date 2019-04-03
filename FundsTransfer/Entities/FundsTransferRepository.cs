@@ -161,20 +161,18 @@ namespace FundsTransfer.Entities
             return ar;
         }
 
-        public string EncData()
+        public string EncData(string value)
         {
-            string tmeconn = "";
-            string flexconn = "";
+            string output = string.Empty;
             try
             {
-                tmeconn = _protector.Protect("");
-                flexconn = _protector.Protect("");
+                 output = _protector.Protect(value);
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
-            return flexconn;
+            return output;
         }
     }
 }

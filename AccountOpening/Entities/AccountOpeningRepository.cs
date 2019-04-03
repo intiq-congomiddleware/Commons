@@ -279,7 +279,21 @@ namespace AccountOpening.Entities
             }
 
             return account.FirstOrDefault();
-        }       
+        }
+
+        public string EncData(string value)
+        {
+            string output = string.Empty;
+            try
+            {
+                output = _protector.Protect(value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return output;
+        }
     }
 }
 
