@@ -51,6 +51,8 @@ namespace FundsTransfer.Entities
 
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
 
+            string acc_ccy = (request.product == "CHDP") ? request.cract : request.dract;
+
             var param = new DynamicParameters();
             param.Add("dract", request.dract.Trim());
             if (!request.with_charges) param.Add("cract", request.cract?.Trim());
@@ -59,9 +61,8 @@ namespace FundsTransfer.Entities
             param.Add("trnamt", request.trnamt);
             if (request.with_charges) param.Add("trnamt1", request.trnamt1);
             param.Add("trnrefno", request.trnrefno.Trim());
-            param.Add("l_acs_ccy", request.l_acs_ccy.Trim());
+            param.Add("l_acs_ccy", await GetAccountCurrency(acc_ccy));
             param.Add("txnnarra", request.txnnarra);
-            //if (request.with_charges) param.Add("prate", request.prate?.Trim());
             param.Add("product", request.product.Trim());
             param.Add("instr_code", request.instr_code.Trim());
             param.Add("branch_code", request.branch_code.Trim());
@@ -115,7 +116,7 @@ namespace FundsTransfer.Entities
             {
                 using (oralConnect)
                 {
-                    string query = $@"SELECT A.* FROM FCCUAT.STTM_CUST_ACCOUNT A INNER JOIN FCCUAT.STTM_CUST_ACCOUNT B ON A.CUST_NO = B.CUST_NO
+                    string query = $@"SELECT A.* FROM {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT A INNER JOIN {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT B ON A.CUST_NO = B.CUST_NO
                                 WHERE A.CUST_AC_NO = :dract AND B.CUST_AC_NO = :cract";
 
                     var r = await oralConnect.QueryAsync<string>(query, new { request.dract, request.cract });
@@ -130,6 +131,27 @@ namespace FundsTransfer.Entities
             }
 
             return response;
+        }
+
+        private async Task<string> GetAccountCurrency(string accountNo)
+        {
+            IEnumerable<Currency> currencies = new List<Currency>();
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+            try
+            {
+                string query = $@"select ccy from {_appSettings.FlexSchema}.sttm_cust_account where cust_ac_no= :accountNo";
+                using (oralConnect)
+                {
+                    currencies = await oralConnect.QueryAsync<Currency>(query, new { accountNo });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return string.Empty;
+            }
+
+            return currencies.FirstOrDefault().ccy;
         }
 
         public async Task<AccountEnquiryResponse> GetAccountEnquiryByAccountNumber(AccountEnquiryRequest request)
