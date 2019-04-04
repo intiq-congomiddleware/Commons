@@ -53,6 +53,12 @@ namespace FundsTransfer.Entities
 
             string acc_ccy = (request.product == "CHDP") ? request.cract : request.dract;
 
+            request.l_acs_ccy = await GetAccountCurrency(acc_ccy);
+
+            request.trnrefno = $"{request.branch_code}{request.product}{request.l_acs_ccy}" +
+                   $"{Commons.Helpers.Utility.RandomString(6)}";
+            
+
             var param = new DynamicParameters();
             param.Add("dract", request.dract.Trim());
             if (!request.with_charges) param.Add("cract", request.cract?.Trim());
@@ -61,7 +67,7 @@ namespace FundsTransfer.Entities
             param.Add("trnamt", request.trnamt);
             if (request.with_charges) param.Add("trnamt1", request.trnamt1);
             param.Add("trnrefno", request.trnrefno.Trim());
-            param.Add("l_acs_ccy", await GetAccountCurrency(acc_ccy));
+            param.Add("l_acs_ccy", request.l_acs_ccy);
             param.Add("txnnarra", request.txnnarra);
             param.Add("product", request.product.Trim());
             param.Add("instr_code", request.instr_code.Trim());

@@ -49,8 +49,9 @@ namespace FundsTransfer.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
 
-                request.trnrefno = $"{request.branch_code}{request.product}{request.l_acs_ccy}" +
-                    $"{Commons.Helpers.Utility.RandomString(6)}";
+                //request.trnrefno = $"{request.branch_code}{request.product}{request.l_acs_ccy}" +
+                //    $"{Commons.Helpers.Utility.RandomString(6)}";
+
                 request.trans_type = 1;
 
                 if (request.is_own_account && !await _orclRepo.IsOwnAccount(request))
@@ -104,7 +105,7 @@ namespace FundsTransfer.Controllers
             return CreatedAtAction("transfer", resp);
         }
 
-        [HttpGet("encdata/{value}")]
+        //[HttpGet("encdata/{value}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(Response), 400)]
         [ProducesResponseType(typeof(Response), 500)]
