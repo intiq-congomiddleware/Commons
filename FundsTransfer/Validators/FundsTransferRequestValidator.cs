@@ -12,8 +12,8 @@ namespace FundsTransfer.Validators
         public FundsTransferRequestValidator()
         {
             RuleFor(req => req.cract)
-                   .MaximumLength(20)
-                   .When(x => !string.IsNullOrEmpty(x.cract));
+                   .MaximumLength(20);
+                   //.When(x => !string.IsNullOrEmpty(x.cract));
 
             RuleFor(req => req.cract1)
                    .NotNull()
@@ -28,8 +28,8 @@ namespace FundsTransfer.Validators
                    .When(x => x.with_charges);
 
             RuleFor(req => req.dract)
-                  .MaximumLength(20)
-                  .When(x => !string.IsNullOrEmpty(x.cract));
+                  .MaximumLength(20);
+                  //.When(x => !string.IsNullOrEmpty(x.cract));
 
             RuleFor(req => req.trnamt)
                     .NotNull()
@@ -46,10 +46,10 @@ namespace FundsTransfer.Validators
                     .NotEmpty()
                     .MaximumLength(100);
 
-            RuleFor(req => req.l_acs_ccy)
-                  .NotNull()
-                  .NotEmpty()
-                  .MaximumLength(100);
+            //RuleFor(req => req.l_acs_ccy)
+            //      .NotNull()
+            //      .NotEmpty()
+            //      .MaximumLength(100);
 
             RuleFor(req => req.instr_code)
                   .NotNull()
