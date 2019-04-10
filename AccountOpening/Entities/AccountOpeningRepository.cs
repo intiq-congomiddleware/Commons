@@ -281,6 +281,27 @@ namespace AccountOpening.Entities
             return account.FirstOrDefault();
         }
 
+        public async Task<AccountOpeningResponse> GetAccountOpeningResponseCustomerOnly(string seq_num)
+        {
+            IEnumerable<AccountOpeningResponse> account = new List<AccountOpeningResponse>();
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+            try
+            {
+                string query = $@"select customer_no,local_branch as branch_code from {_appSettings.FlexSchema}.sttm_upload_customer where maintenance_seq_no = :seq_num";
+
+                using (oralConnect)
+                {
+                    account = await oralConnect.QueryAsync<AccountOpeningResponse>(query, new { seq_num });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return account.FirstOrDefault();
+        }
+
         public string EncData(string value)
         {
             string output = string.Empty;

@@ -67,7 +67,7 @@ namespace AccountOpening.Controllers
                     if (tuple.Item1)
                     {
                         if (customerOnly)
-                            return CreatedAtAction("create", await _orclRepo.GetAccountOpeningResponse(tuple.Item2.MAINTENANCE_SEQ_NO));
+                            return CreatedAtAction("create", await _orclRepo.GetAccountOpeningResponseCustomerOnly(tuple.Item2.MAINTENANCE_SEQ_NO));
 
                         aor = await CreateAccount(request, e, tuple.Item2.MAINTENANCE_SEQ_NO);
                     }
