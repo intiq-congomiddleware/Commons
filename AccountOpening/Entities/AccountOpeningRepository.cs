@@ -287,7 +287,7 @@ namespace AccountOpening.Entities
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             try
             {
-                string query = $@"select customer_no,local_branch as branch_code from {_appSettings.FlexSchema}.sttm_upload_customer where maintenance_seq_no = :seq_num";
+                string query = $@"select customer_no,local_branch as branch_code,customer_name1 as customer_name from {_appSettings.FlexSchema}.sttm_upload_customer where maintenance_seq_no = :seq_num";
 
                 using (oralConnect)
                 {
