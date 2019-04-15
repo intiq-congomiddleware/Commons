@@ -49,22 +49,21 @@ namespace FundsTransfer.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
 
-                //request.trnrefno = $"{request.branch_code}{request.product}{request.l_acs_ccy}" +
-                //    $"{Commons.Helpers.Utility.RandomString(6)}";
-
+                request.trnrefno = $"{request.branch_code}{request.product}{request.l_acs_ccy}" +
+                    $"{Commons.Helpers.Utility.RandomString(6)}";
                 request.trans_type = 1;
 
                 if (request.is_own_account && !await _orclRepo.IsOwnAccount(request))
-                    return StatusCode((int)HttpStatusCode.BadRequest,
+                    return StatusCode((int)HttpStatusCode.BadRequest, 
                         Commons.Helpers.Utility.GetResponse(Constant.ACCOUNT_NOT_LINKED, HttpStatusCode.BadRequest));
 
                 if (!string.IsNullOrEmpty(request.cract) && request.cract.Length != 9)
                 {
                     aresp = await _orclRepo.GetAccountEnquiryByAccountNumber(new AccountEnquiryRequest() { accountNumber = request.cract });
-
+                 
                     if (aresp?.ac_stat_no_cr?.ToUpper().Trim() != "N")
                     {
-                        return StatusCode((int)HttpStatusCode.BadRequest,
+                        return StatusCode((int)HttpStatusCode.BadRequest, 
                             Commons.Helpers.Utility.GetResponse(Constant.STAT_NO_CR, HttpStatusCode.BadRequest));
                     }
                 }
@@ -86,6 +85,11 @@ namespace FundsTransfer.Controllers
                     }
                 }
 
+                //if (Utility.Authorization(request.authorization, _authSettings))
+                //{
+                //    if (Utility.FraudCheck(request))
+                //    {
+
                 string sproc = (request.with_charges) ? _appSettings.ChrgsSproc : _appSettings.PaytSproc;
 
                 resp = await _orclRepo.ExecuteTransaction(request, sproc);
@@ -95,6 +99,21 @@ namespace FundsTransfer.Controllers
                     resp.id = request.trnrefno;
                     resp.trnrefno = request.trnrefno;
                 }
+
+                //}
+                //    }
+                //    else
+                //    {
+                //        resp.status = "34";
+                //        resp.message = "Suspicious Transaction";
+                //    }
+                //}
+                //else
+                //{
+                //    _logger.LogInformation($"payment Request : {JsonHelper.toJson(request)} | Header authorization failed");
+                //    resp.status = "96";
+                //    resp.message = "Unauthorized";
+                //}
             }
             catch (Exception ex)
             {
@@ -103,15 +122,6 @@ namespace FundsTransfer.Controllers
             }
 
             return CreatedAtAction("transfer", resp);
-        }
-
-        //[HttpGet("encdata/{value}")]
-        [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(Response), 400)]
-        [ProducesResponseType(typeof(Response), 500)]
-        public async Task<IActionResult> encdata(string value)
-        {
-            return Ok(_orclRepo.EncData(value));
         }
     }
 }

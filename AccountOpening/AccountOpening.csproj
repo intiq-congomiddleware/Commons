@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.7" />
-    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="2.1.1" />
     <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.621" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.0.100" />
     <PackageReference Include="Microsoft.AspNetCore.App" />

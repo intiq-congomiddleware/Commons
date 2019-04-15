@@ -23,8 +23,6 @@ using NJsonSchema;
 using NSwag.AspNetCore;
 using NSwag.SwaggerGeneration.Processors.Security;
 using Serilog;
-using Microsoft.AspNetCore.DataProtection;
-using System.IO;
 
 namespace AccountOpening
 {
@@ -80,10 +78,6 @@ namespace AccountOpening
 
             //Validators
             services.AddScoped<IValidator<AccountOpeningRequest>, AccountOpeningRequestValidator>();
-
-
-            services.AddDataProtection()
-                       .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Server\Share\Keys\"));
 
             //Oracle  Repositories
             services.AddScoped<IAccountOpeningRepository, AccountOpeningRepository>();

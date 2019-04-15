@@ -50,14 +50,5 @@ namespace BalanceEnquiry.Controllers
 
             return CreatedAtAction("enquiry", b);
         }
-
-        //[HttpGet("encdata/{value}")]
-        [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(Response), 400)]
-        [ProducesResponseType(typeof(Response), 500)]
-        public async Task<IActionResult> encdata(string value)
-        {
-            return Ok(_orclRepo.EncData(value));
-        }
     }
 }

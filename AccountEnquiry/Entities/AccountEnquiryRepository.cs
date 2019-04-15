@@ -6,27 +6,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.DataProtection;
 
 namespace AccountEnquiry.Entities
 {
     public class AccountEnquiryRepository : IAccountEnquiryRepository
     {
         private readonly AppSettings _appSettings;
-        //private readonly IDataProtectionProvider _provider;
-        private IDataProtector _protector;
 
-        public AccountEnquiryRepository(IOptions<AppSettings> appSettings, IDataProtectionProvider provider)
+        public AccountEnquiryRepository(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
-            _protector = provider.CreateProtector("treyryug");
         }
 
         public async Task<AccountEnquiryResponse> GetAccountEnquiryByAccountNumber(AccountEnquiryRequest request)
         {
             AccountEnquiryResponse ar = new AccountEnquiryResponse();
 
-            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
             using (oralConnect)
             {
                 string query = $@"SELECT LPAD(A.BRANCH_CODE,3,0) COD_CC_BRN, A.CUST_AC_NO COD_ACCT_NO, A.AC_DESC COD_ACCT_TITLE,
@@ -55,7 +51,7 @@ namespace AccountEnquiry.Entities
         {
             List<AccountEnquiryResponse> ar = new List<AccountEnquiryResponse>();
 
-            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
             using (oralConnect)
             {
                 string query = $@"SELECT LPAD(A.BRANCH_CODE,3,0) COD_CC_BRN, A.CUST_AC_NO COD_ACCT_NO, A.AC_DESC COD_ACCT_TITLE,
@@ -84,7 +80,7 @@ namespace AccountEnquiry.Entities
         {
             List<AccountEnquiryResponse> ar = new List<AccountEnquiryResponse>();
 
-            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
             using (oralConnect)
             {
                 string query = $@"SELECT LPAD(A.BRANCH_CODE,3,0) COD_CC_BRN, A.CUST_AC_NO COD_ACCT_NO, A.AC_DESC COD_ACCT_TITLE,
@@ -107,20 +103,6 @@ namespace AccountEnquiry.Entities
                 ar = ars.ToList();
             }
             return ar;
-        }
-
-        public string EncData(string value)
-        {
-            string output = string.Empty;
-            try
-            {
-                output = _protector.Protect(value);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            return output;
         }
     }
 }

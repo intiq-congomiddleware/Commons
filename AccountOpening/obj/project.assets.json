@@ -12738,7 +12738,6 @@
       "Devart.Data.Oracle.EFCore >= 9.6.621",
       "FluentValidation.AspNetCore >= 8.0.100",
       "Microsoft.AspNetCore.App >= 2.1.1",
-      "Microsoft.AspNetCore.DataProtection >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
       "NSwag.AspNetCore >= 11.20.1",
@@ -12808,10 +12807,6 @@
             "target": "Package",
             "version": "[2.1.1, )",
             "autoReferenced": true
-          },
-          "Microsoft.AspNetCore.DataProtection": {
-            "target": "Package",
-            "version": "[2.1.1, )"
           },
           "Microsoft.AspNetCore.Razor.Design": {
             "suppressParent": "All",

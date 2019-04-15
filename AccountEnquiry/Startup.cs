@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +12,6 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -85,9 +83,6 @@ namespace AccountEnquiry
 
             //Oracle  Repositories
             services.AddScoped<IAccountEnquiryRepository, AccountEnquiryRepository>();
-
-            services.AddDataProtection()
-                       .PersistKeysToFileSystem(new DirectoryInfo(@"C:\Server\Share\Keys\"));
 
             services.AddMvc().AddFluentValidation(fvc => { }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

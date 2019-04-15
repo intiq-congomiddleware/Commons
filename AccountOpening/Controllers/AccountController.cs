@@ -34,7 +34,7 @@ namespace AccountOpening.Controllers
         [ProducesResponseType(typeof(AccountOpeningResponse), 200)]
         [ProducesResponseType(typeof(Response), 400)]
         [ProducesResponseType(typeof(Response), 500)]
-        public async Task<IActionResult> create([FromBody] AccountOpeningRequest request, bool customerOnly = false)
+        public async Task<IActionResult> create([FromBody] AccountOpeningRequest request)
         {
             AccountOpeningResponse aor = new AccountOpeningResponse();
             List<string> messages = new List<string>();
@@ -66,12 +66,11 @@ namespace AccountOpening.Controllers
 
                     if (tuple.Item1)
                     {
-                        if (customerOnly)
-                            return CreatedAtAction("create", await _orclRepo.GetAccountOpeningResponseCustomerOnly(tuple.Item2.MAINTENANCE_SEQ_NO));
-
                         aor = await CreateAccount(request, e, tuple.Item2.MAINTENANCE_SEQ_NO);
                     }
                 }
+
+                //a.message = (a.status) ? "Account Created Successfully" : "Account Creation Failed";
             }
             catch (Exception ex)
             {
@@ -184,15 +183,6 @@ namespace AccountOpening.Controllers
             }
 
             return new Tuple<bool, Customer>(isCustomerAdded && isCustomerExecuted, c);
-        }
-
-        //[HttpGet("encdata/{value}")]
-        [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(Response), 400)]
-        [ProducesResponseType(typeof(Response), 500)]
-        public async Task<IActionResult> encdata(string value)
-        {
-            return Ok(_orclRepo.EncData(value));
         }
     }
 }

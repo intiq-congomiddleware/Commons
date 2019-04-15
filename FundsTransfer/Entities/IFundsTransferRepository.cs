@@ -12,6 +12,5 @@ namespace FundsTransfer.Entities
         Task<bool> UpdateTransactionResponse(FundsTransferResponse resp);
         Task<bool> IsOwnAccount(FundsTransferRequest request);
         Task<AccountEnquiryResponse> GetAccountEnquiryByAccountNumber(AccountEnquiryRequest request);
-        string EncData(string value);
     }
 }
