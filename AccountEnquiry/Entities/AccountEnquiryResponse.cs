@@ -26,6 +26,7 @@ namespace AccountEnquiry.Entities
         public string branch { get; set; }
         public string bal_available { get; set; }
         public string date_of_birth { get; set; }
+        public string customer_phonenumber { get; set; }
         public string customer_category { get; set; }
         public string responsecode { get; set; }
         public string responsemessage { get; set; }

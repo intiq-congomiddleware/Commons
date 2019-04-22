@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace FundsTransfer.Entities
 {
+    public enum currency
+    {
+        CDF,
+        USD
+    }
     public class FundsTransferRequest
     {
         public string dract { get; set; }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Commons.Entities;
 using Dapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
 using Oracle.ManagedDataAccess.Client;
 
@@ -13,17 +14,20 @@ namespace FundsTransfer.Entities
     public class FundsTransferRepository : IFundsTransferRepository
     {
         private readonly AppSettings _appSettings;
+        //private readonly IDataProtectionProvider _provider;
+        private IDataProtector _protector;
 
-        public FundsTransferRepository(IOptions<AppSettings> appSettings)
+        public FundsTransferRepository(IOptions<AppSettings> appSettings, IDataProtectionProvider provider)
         {
             _appSettings = appSettings.Value;
+            _protector = provider.CreateProtector("treyryug");
         }
 
         public async Task<bool> ValidateTransactionByRef(TransLog transLog)
         {
             bool response = false;
 
-            var oralConnect = new OracleConnection(_appSettings.TMEConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.TMEConnection));
 
             using (oralConnect)
             {
@@ -45,7 +49,15 @@ namespace FundsTransfer.Entities
 
             string storeProcedure = $"{_appSettings.FlexSchema}.{sproc}";
 
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+
+            //string acc_ccy = (request.product == "CHDP") ? request.cract : request.dract;
+
+            //request.l_acs_ccy = await GetAccountCurrency(acc_ccy);
+
+            request.trnrefno = $"{request.branch_code}{request.product}{request.l_acs_ccy}" +
+                   $"{Commons.Helpers.Utility.RandomString(6)}";
+            
 
             var param = new DynamicParameters();
             param.Add("dract", request.dract.Trim());
@@ -55,9 +67,8 @@ namespace FundsTransfer.Entities
             param.Add("trnamt", request.trnamt);
             if (request.with_charges) param.Add("trnamt1", request.trnamt1);
             param.Add("trnrefno", request.trnrefno.Trim());
-            param.Add("l_acs_ccy", request.l_acs_ccy.Trim());
+            param.Add("l_acs_ccy", request.l_acs_ccy);
             param.Add("txnnarra", request.txnnarra);
-            //if (request.with_charges) param.Add("prate", request.prate?.Trim());
             param.Add("product", request.product.Trim());
             param.Add("instr_code", request.instr_code.Trim());
             param.Add("branch_code", request.branch_code.Trim());
@@ -87,7 +98,7 @@ namespace FundsTransfer.Entities
         {
             bool response = false;
 
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             using (oralConnect)
             {
                 string query = $@" Update {_appSettings.FlexSchema}.tme_postedtxn set transactionreference =:trnrefno, 
@@ -106,12 +117,12 @@ namespace FundsTransfer.Entities
         {
             bool response = false;
 
-            var oralConnect = new OracleConnection(_appSettings.TMEConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.TMEConnection));
             try
             {
                 using (oralConnect)
                 {
-                    string query = $@"SELECT A.* FROM FCCUAT.STTM_CUST_ACCOUNT A INNER JOIN FCCUAT.STTM_CUST_ACCOUNT B ON A.CUST_NO = B.CUST_NO
+                    string query = $@"SELECT A.* FROM {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT A INNER JOIN {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT B ON A.CUST_NO = B.CUST_NO
                                 WHERE A.CUST_AC_NO = :dract AND B.CUST_AC_NO = :cract";
 
                     var r = await oralConnect.QueryAsync<string>(query, new { request.dract, request.cract });
@@ -128,11 +139,32 @@ namespace FundsTransfer.Entities
             return response;
         }
 
+        private async Task<string> GetAccountCurrency(string accountNo)
+        {
+            IEnumerable<Currency> currencies = new List<Currency>();
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+            try
+            {
+                string query = $@"select ccy from {_appSettings.FlexSchema}.sttm_cust_account where cust_ac_no= :accountNo";
+                using (oralConnect)
+                {
+                    currencies = await oralConnect.QueryAsync<Currency>(query, new { accountNo });
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return string.Empty;
+            }
+
+            return currencies.FirstOrDefault().ccy;
+        }
+
         public async Task<AccountEnquiryResponse> GetAccountEnquiryByAccountNumber(AccountEnquiryRequest request)
         {
             AccountEnquiryResponse ar = new AccountEnquiryResponse();
 
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             using (oralConnect)
             {
                 string query = $@"SELECT LPAD(A.BRANCH_CODE,3,0) COD_CC_BRN, A.CUST_AC_NO COD_ACCT_NO, A.AC_DESC COD_ACCT_TITLE,
@@ -155,6 +187,20 @@ namespace FundsTransfer.Entities
                 ar = ars.FirstOrDefault();
             }
             return ar;
+        }
+
+        public string EncData(string value)
+        {
+            string output = string.Empty;
+            try
+            {
+                 output = _protector.Protect(value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return output;
         }
     }
 }

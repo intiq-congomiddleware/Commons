@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commons", "Commons\Commons.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountEnquiry", "AccountEnquiry\AccountEnquiry.csproj", "{C8AD7FBC-EDB8-45FC-95B7-94476E635874}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionStatus", "TransactionStatus\TransactionStatus.csproj", "{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C8AD7FBC-EDB8-45FC-95B7-94476E635874}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8AD7FBC-EDB8-45FC-95B7-94476E635874}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8AD7FBC-EDB8-45FC-95B7-94476E635874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

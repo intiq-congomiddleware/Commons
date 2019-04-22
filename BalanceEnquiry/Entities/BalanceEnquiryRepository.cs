@@ -6,23 +6,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Commons.Entities;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace BalanceEnquiry.Entities
 {
     public class BalanceEnquiryRepository : IBalanceEnquiryRepository
     {
         private readonly AppSettings _appSettings;
+        //private readonly IDataProtectionProvider _provider;
+        private IDataProtector _protector;
 
-        public BalanceEnquiryRepository(IOptions<AppSettings> appSettings)
+        public BalanceEnquiryRepository(IOptions<AppSettings> appSettings, IDataProtectionProvider provider)
         {
             _appSettings = appSettings.Value;
+            _protector = provider.CreateProtector("treyryug");
         }
 
         public async Task<BalanceEnquiryResponse> GetBalanceEnquiry(BalanceEnquiryRequest request)
         {
+            //EncData();
             BalanceEnquiryResponse br = new BalanceEnquiryResponse();
 
-            var oralConnect = new OracleConnection(_appSettings.FlexConnection);
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
             using (oralConnect)
             {
                 //Confirm if ther is phone number on this table
@@ -47,6 +52,20 @@ namespace BalanceEnquiry.Entities
                 br = brs.FirstOrDefault();
             }
             return br;
+        }
+
+        public string EncData(string value)
+        {
+            string output = string.Empty;
+            try
+            {
+                output = _protector.Protect(value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return output;
         }
     }
 }

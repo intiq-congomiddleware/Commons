@@ -8,5 +8,6 @@ namespace BalanceEnquiry.Entities
     public interface IBalanceEnquiryRepository
     {
         Task<BalanceEnquiryResponse> GetBalanceEnquiry(BalanceEnquiryRequest request);
+        string EncData(string value);
     }
 }
