@@ -14,8 +14,8 @@ namespace TransactionStatus.Validators
 
             RuleFor(req => req.transactionRef)
                     .NotNull()
-                    .NotEmpty()
-                    .MaximumLength(100);
+                    .NotEmpty();
+                    //.MaximumLength(100);
         }
     }
 }

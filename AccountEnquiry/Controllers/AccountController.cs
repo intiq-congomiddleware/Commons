@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using AccountEnquiry.Entities;
 using Commons.Entities;
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,11 +21,14 @@ namespace AccountEnquiry.Controllers
     {
         private readonly ILogger<AccountController> _logger;
         private readonly IAccountEnquiryRepository _orclRepo;
+        private readonly IAntiforgery _antiforgery;
 
-        public AccountController(ILogger<AccountController> logger, IAccountEnquiryRepository orclRepo)
+        public AccountController(ILogger<AccountController> logger, IAccountEnquiryRepository orclRepo
+            , IAntiforgery antiforgery)
         {
             _logger = logger;
             _orclRepo = orclRepo;
+            _antiforgery = antiforgery;
         }
 
         [HttpPost("enquirybyaccountno")]

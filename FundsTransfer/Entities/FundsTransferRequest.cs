@@ -11,6 +11,7 @@ namespace FundsTransfer.Entities
         CDF,
         USD
     }
+
     public class FundsTransferRequest
     {
         public string dract { get; set; }
