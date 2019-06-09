@@ -31,9 +31,11 @@ namespace TransactionStatus.Entities
             {
                 string query = $@"SELECT * FROM {_appSettings.FlexSchema}.ACTB_DAILY_LOG WHERE AUTH_STAT = ‘A’ AND TRN_REF_NO = :transactionRef";
 
-                var r = await oralConnect.QueryAsync<string>(query, transactionRef);
+                var r = await oralConnect.QueryAsync<string>(query, new { transactionRef });
 
                 response.message = r.FirstOrDefault();
+
+                if (!string.IsNullOrWhiteSpace(response.message)) { response.status = "true"; }
             }
 
             return response;

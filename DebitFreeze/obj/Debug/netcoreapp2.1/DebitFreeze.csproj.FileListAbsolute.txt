@@ -1,0 +1,17 @@
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\DebitFreeze.deps.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\DebitFreeze.runtimeconfig.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\DebitFreeze.runtimeconfig.dev.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\DebitFreeze.dll
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\DebitFreeze.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\Commons.dll
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.csprojAssemblyReference.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.csproj.CoreCompileInputs.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.RazorAssemblyInfo.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.RazorAssemblyInfo.cs
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.AssemblyInfoInputs.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.AssemblyInfo.cs
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.RazorTargetAssemblyInfo.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.csproj.CopyComplete
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.dll
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.pdb

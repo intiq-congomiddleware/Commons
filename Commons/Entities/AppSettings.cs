@@ -18,5 +18,7 @@ namespace Commons.Entities
         public string[] loggerModeOn { get; set; }
         public string PaytSproc { get; set; }
         public string ChrgsSproc { get; set; }
+        public string UserId { get; set; }
+        public int Duration { get; set; }
     }
 }

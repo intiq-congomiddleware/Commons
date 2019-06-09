@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountOpening", "AccountOpening\AccountOpening.csproj", "{A7DFA76C-31EF-469E-A474-23A1DE6C870F}"
 EndProject
@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commons", "Commons\Commons.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountEnquiry", "AccountEnquiry\AccountEnquiry.csproj", "{C8AD7FBC-EDB8-45FC-95B7-94476E635874}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionStatus", "TransactionStatus\TransactionStatus.csproj", "{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransactionStatus", "TransactionStatus\TransactionStatus.csproj", "{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitFreeze", "DebitFreeze\DebitFreeze.csproj", "{4B4FE7C9-5868-43DE-A622-82550E096C56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatementGeneration", "StatementGeneration\StatementGeneration.csproj", "{A23B5844-A583-4BA6-909E-D741EF048D65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B4FE7C9-5868-43DE-A622-82550E096C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B4FE7C9-5868-43DE-A622-82550E096C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B4FE7C9-5868-43DE-A622-82550E096C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B4FE7C9-5868-43DE-A622-82550E096C56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23B5844-A583-4BA6-909E-D741EF048D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23B5844-A583-4BA6-909E-D741EF048D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23B5844-A583-4BA6-909E-D741EF048D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23B5844-A583-4BA6-909E-D741EF048D65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -56,7 +56,7 @@ namespace TransactionStatus.Controllers
             return CreatedAtAction("check", r);
         }
 
-        //[HttpGet("encdata/{value}")]
+        [HttpGet("encdata/{value}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(Response), 400)]
         [ProducesResponseType(typeof(Response), 500)]
