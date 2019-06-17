@@ -24,13 +24,21 @@ namespace StatementGeneration.Entities
         {
             List<StatementResponse> response = new List<StatementResponse>();
 
+            StatementRequestDTO req = new StatementRequestDTO()
+            {
+                acct = request.accountNumber,
+                end_dt = request.endDate,
+                start_dt = request.startDate,
+                USERID = request.userId
+            };
+
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
 
             using (oralConnect)
             {
-                string query = $@"SELECT {_appSettings.FlexSchema}.FN_STATEMENT_ENQ(:userId, :accountNumber, :startDate, :endDate) RETURN_VALUE FROM DUAL";
+                string query = $@"SELECT {_appSettings.FlexSchema}.FN_STATEMENT_ENQ(:USERID, :acct, :start_dt, :end_dt) RETURN_VALUE FROM DUAL";
 
-                var r = await oralConnect.QueryAsync<StatementResponse>(query, new { request });
+                var r = await oralConnect.QueryAsync<StatementResponse>(query, new { req });
 
                 response = r.ToList();
             }

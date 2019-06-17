@@ -10,11 +10,15 @@ namespace StatementGeneration.Entities
     {
         public string accountNumber { get; set; }
         public int noOfRecords { get; set; }
-        //[JsonIgnore]
         public string userId { get; set; }
-        //[JsonIgnore]
         public DateTime startDate { get; set; }
-        //[JsonIgnore]
         public DateTime endDate { get; set; }
+    }
+    public class StatementRequestDTO
+    {
+        public string acct { get; set; }
+        public string USERID { get; set; }
+        public DateTime start_dt { get; set; }
+        public DateTime end_dt { get; set; }
     }
 }
