@@ -14,3 +14,4 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.csprojAssemblyReference.cache

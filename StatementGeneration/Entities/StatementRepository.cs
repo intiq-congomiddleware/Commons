@@ -22,24 +22,7 @@ namespace StatementGeneration.Entities
         }
         public async Task<int> GenerateStatement(StatementRequest request)
         {
-            //List<StatementResponse> response = new List<StatementResponse>();
-            int response = -1;
-
-            //StatementRequestDTO req = new StatementRequestDTO()
-            //{
-            //    acct = request.accountNumber,
-            //    end_dt = request.endDate.ToString("dd-MMM-yyyy"),
-            //    start_dt = request.startDate.ToString("dd-MMM-yyyy"),
-            //    runUSERID = request.userId
-            //};
-
-            //var parameters = new OracleDynamicParameters();
-
-            //var param = new DynamicParameters();
-            //param.Add("runUSERID", request.userId.Trim());
-            //param.Add("acct", request.accountNumber.Trim());
-            //param.Add("start_dt", request.startDate.ToString("dd-MMM-yyyy"));
-            //param.Add("end_dt", request.endDate.ToString("dd-MMM-yyyy"));           
+            int response = -1;         
 
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
 
