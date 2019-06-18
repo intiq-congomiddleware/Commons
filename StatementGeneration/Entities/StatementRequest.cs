@@ -16,9 +16,9 @@ namespace StatementGeneration.Entities
     }
     public class StatementRequestDTO
     {
-        public string acct { get; set; }
-        public string USERID { get; set; }
-        public DateTime start_dt { get; set; }
-        public DateTime end_dt { get; set; }
+        public string runUSERID { get; set; }
+        public string acct { get; set; }   
+        public string start_dt { get; set; }
+        public string end_dt { get; set; }
     }
 }

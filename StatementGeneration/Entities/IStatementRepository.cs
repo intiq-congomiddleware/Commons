@@ -7,7 +7,7 @@ namespace StatementGeneration.Entities
 {
     public interface IStatementRepository
     {
-        Task<List<StatementResponse>> GenerateStatement(StatementRequest request);
+        Task<int> GenerateStatement(StatementRequest request);
         Task<List<StatementResponse>> FilterStatement(StatementRequest request);
         string EncData(string value);
     }

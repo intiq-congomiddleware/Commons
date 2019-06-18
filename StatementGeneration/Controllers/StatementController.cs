@@ -45,9 +45,9 @@ namespace StatementGeneration.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));             
 
-                var gs = await _orclRepo.GenerateStatement(request);
+                int gs = await _orclRepo.GenerateStatement(request);
 
-                if (gs != null)
+                if (gs == 0)
                 {
                     r = await _orclRepo.FilterStatement(request);
                     if (request.noOfRecords > 0)

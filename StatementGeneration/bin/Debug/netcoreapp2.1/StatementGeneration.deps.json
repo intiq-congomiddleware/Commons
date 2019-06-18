@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "5647a956ef48aa3bc559ae3d3afe6df07b0f9b71"
+    "signature": "4d07dbbf3665e8b6b9cbf59b9f54903f6c2224a9"
   },
   "compilationOptions": {
     "defines": [
@@ -25,6 +25,7 @@
       "StatementGeneration/1.0.0": {
         "dependencies": {
           "Dapper": "1.50.7",
+          "Dapper.Oracle": "1.2.1",
           "FluentValidation.AspNetCore": "8.0.100",
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
@@ -58,6 +59,20 @@
         },
         "compile": {
           "lib/netstandard2.0/Dapper.dll": {}
+        }
+      },
+      "Dapper.Oracle/1.2.1": {
+        "dependencies": {
+          "Dapper": "1.50.7"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Dapper.Oracle.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.2.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Dapper.Oracle.dll": {}
         }
       },
       "FluentValidation/8.0.100": {
@@ -3787,6 +3802,13 @@
       "sha512": "sha512-3ZHVc9uiUnKLaigSNtk79F2riLl32BtE7Za/kV/cjdfA6jbGiVZbxJ851aA3AbjTIG+MDFP8y19deJ6wW8nVSQ==",
       "path": "dapper/1.50.7",
       "hashPath": "dapper.1.50.7.nupkg.sha512"
+    },
+    "Dapper.Oracle/1.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+9qYYBGgoz9/Zah2KxIw+je/RVhVe9Dt9LNEwk6fBI/Mu87TyrcTbs2qHceBRtxkqRxX1lIMwt7elznLbWWqRQ==",
+      "path": "dapper.oracle/1.2.1",
+      "hashPath": "dapper.oracle.1.2.1.nupkg.sha512"
     },
     "FluentValidation/8.0.100": {
       "type": "package",

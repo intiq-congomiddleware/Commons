@@ -1,4 +1,5 @@
 ﻿using Commons.Entities;
+using Dapper.Oracle;
 using Dapper;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
@@ -20,27 +21,36 @@ namespace StatementGeneration.Entities
             _appSettings = appSettings.Value;
             _protector = provider.CreateProtector("treyryug");
         }
-        public async Task<List<StatementResponse>> GenerateStatement(StatementRequest request)
+        public async Task<int> GenerateStatement(StatementRequest request)
         {
-            List<StatementResponse> response = new List<StatementResponse>();
+            //List<StatementResponse> response = new List<StatementResponse>();
+            int response = -1;
 
-            StatementRequestDTO req = new StatementRequestDTO()
-            {
-                acct = request.accountNumber,
-                end_dt = request.endDate,
-                start_dt = request.startDate,
-                USERID = request.userId
-            };
+            //StatementRequestDTO req = new StatementRequestDTO()
+            //{
+            //    acct = request.accountNumber,
+            //    end_dt = request.endDate.ToString("dd-MMM-yyyy"),
+            //    start_dt = request.startDate.ToString("dd-MMM-yyyy"),
+            //    runUSERID = request.userId
+            //};
 
+            var parameters = new OracleDynamicParameters();
+
+            var param = new DynamicParameters();
+            param.Add("runUSERID", request.userId.Trim());
+            param.Add("acct", request.accountNumber.Trim());
+            param.Add("start_dt", request.startDate.ToString("dd-MMM-yyyy"));
+            param.Add("end_dt", request.endDate.ToString("dd-MMM-yyyy"));           
+            
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
 
             using (oralConnect)
-            {
-                string query = $@"SELECT {_appSettings.FlexSchema}.FN_STATEMENT_ENQ(:USERID, :acct, :start_dt, :end_dt) RETURN_VALUE FROM DUAL";
+            {                
+                string query = $@"SELECT {_appSettings.FlexSchema}.FN_STATEMENT_ENQ(:runUSERID, :acct, :start_dt, :end_dt) RETURN_VALUE FROM DUAL";
 
-                var r = await oralConnect.QueryAsync<StatementResponse>(query, new { req });
+                var r = await oralConnect.ExecuteScalarAsync<int>(query, param);
 
-                response = r.ToList();
+                response = r;
             }
 
             return response;

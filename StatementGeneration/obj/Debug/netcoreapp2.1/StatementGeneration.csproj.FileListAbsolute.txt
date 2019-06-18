@@ -5,6 +5,7 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\bin
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\bin\Debug\netcoreapp2.1\StatementGeneration.pdb
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\bin\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.csprojAssemblyReference.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.csproj.CoreCompileInputs.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.RazorAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.RazorAssemblyInfo.cs
@@ -14,4 +15,3 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.pdb
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\StatementGeneration\obj\Debug\netcoreapp2.1\StatementGeneration.csprojAssemblyReference.cache
