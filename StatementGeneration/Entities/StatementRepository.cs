@@ -1,5 +1,4 @@
 ﻿using Commons.Entities;
-using Dapper.Oracle;
 using Dapper;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Options;
@@ -34,21 +33,21 @@ namespace StatementGeneration.Entities
             //    runUSERID = request.userId
             //};
 
-            var parameters = new OracleDynamicParameters();
+            //var parameters = new OracleDynamicParameters();
 
-            var param = new DynamicParameters();
-            param.Add("runUSERID", request.userId.Trim());
-            param.Add("acct", request.accountNumber.Trim());
-            param.Add("start_dt", request.startDate.ToString("dd-MMM-yyyy"));
-            param.Add("end_dt", request.endDate.ToString("dd-MMM-yyyy"));           
-            
+            //var param = new DynamicParameters();
+            //param.Add("runUSERID", request.userId.Trim());
+            //param.Add("acct", request.accountNumber.Trim());
+            //param.Add("start_dt", request.startDate.ToString("dd-MMM-yyyy"));
+            //param.Add("end_dt", request.endDate.ToString("dd-MMM-yyyy"));           
+
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
 
             using (oralConnect)
             {                
-                string query = $@"SELECT {_appSettings.FlexSchema}.FN_STATEMENT_ENQ(:runUSERID, :acct, :start_dt, :end_dt) RETURN_VALUE FROM DUAL";
+                string query = $@"SELECT {_appSettings.FlexSchema}.FN_STATEMENT_ENQ(:userId, :accountNumber, :startDate, :endDate) RETURN_VALUE FROM DUAL";
 
-                var r = await oralConnect.ExecuteScalarAsync<int>(query, param);
+                var r = await oralConnect.ExecuteScalarAsync<int>(query, new { request.userId, request.accountNumber, request.startDate, request.endDate});
 
                 response = r;
             }
@@ -56,9 +55,9 @@ namespace StatementGeneration.Entities
             return response;
         }
 
-        public async Task<List<StatementResponse>> FilterStatement(StatementRequest request)
+        public async Task<List<StatementResponseDTO>> FilterStatement(StatementRequest request)
         {
-            List<StatementResponse> response = new List<StatementResponse>();
+            List<StatementResponseDTO> response = new List<StatementResponseDTO>();
 
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
 
@@ -72,7 +71,7 @@ namespace StatementGeneration.Entities
                                   INNER JOIN {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT E ON E.CUST_AC_NO = B.ACCOUNTNO
                                   WHERE B.RUN_USERID = :userId AND B.ACCOUNTNO = :accountNumber ORDER BY TRANS_SEQNO";
 
-                var r = await oralConnect.QueryAsync<StatementResponse>(query, new { request });
+                var r = await oralConnect.QueryAsync<StatementResponseDTO>(query, new { request.userId, request.accountNumber });
 
                 response = r.ToList();
             }

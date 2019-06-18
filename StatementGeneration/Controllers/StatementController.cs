@@ -33,12 +33,12 @@ namespace StatementGeneration.Controllers
         }
 
         [HttpPost("statement")]
-        [ProducesResponseType(typeof(List<StatementResponse>), 201)]
+        [ProducesResponseType(typeof(List<StatementResponseDTO>), 201)]
         [ProducesResponseType(typeof(Response), 400)]
         [ProducesResponseType(typeof(Response), 500)]
         public async Task<IActionResult> statement([FromBody] StatementRequest request)
         {
-            List<StatementResponse> r = new List<StatementResponse>();
+            List<StatementResponseDTO> r = new List<StatementResponseDTO>();
 
             try
             {
