@@ -33,7 +33,7 @@ namespace AccountEnquiry.Entities
                                   DECODE(C.ACCOUNT_CLASS,'222','S',C.ac_class_type) ACCOUNT_TYPE,
                                   A.CCY NAM_CCY_SHORT, A.AC_OPEN_DATE DAT_ACCT_OPEN, A.CUST_NO COD_CUST,A.AC_STAT_NO_DR, A.AC_STAT_NO_CR,
                                   A.AC_STAT_BLOCK, A.AC_STAT_STOP_PAY, A.AC_STAT_DORMANT, A.AC_STAT_FROZEN, A.ACCOUNT_CLASS COD_PROD,
-                                  A.AC_STAT_DE_POST,C.description ACCOUNTDESC, BR.branch_name BRANCH,
+                                  A.AC_STAT_DE_POST,C.description ACCOUNTDESC, BR.branch_name BRANCH,A.RECORD_STAT,
                                   A.ACY_AVL_BAL BAL_AVAILABLE, Y.DATE_OF_BIRTH,NVL(Y.TELEPHONE, Y.FAX) CUSTOMER_PHONENUMBER,DECODE(B.CUSTOMER_TYPE,'C','CORPORATE','I','INDIVIDUAL') CUSTOMER_CATEGORY
                                   FROM {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT A
                                   INNER JOIN {_appSettings.FlexSchema}.STTM_CUSTOMER B ON B.CUSTOMER_NO = A.CUST_NO
@@ -62,7 +62,7 @@ namespace AccountEnquiry.Entities
                                   DECODE(C.ACCOUNT_CLASS,'222','S',C.ac_class_type) ACCOUNT_TYPE,
                                   A.CCY NAM_CCY_SHORT, A.AC_OPEN_DATE DAT_ACCT_OPEN, A.CUST_NO COD_CUST,A.AC_STAT_NO_DR, A.AC_STAT_NO_CR,
                                   A.AC_STAT_BLOCK, A.AC_STAT_STOP_PAY, A.AC_STAT_DORMANT, A.AC_STAT_FROZEN, A.ACCOUNT_CLASS COD_PROD,
-                                  A.AC_STAT_DE_POST,C.description ACCOUNTDESC, BR.branch_name BRANCH,
+                                  A.AC_STAT_DE_POST,C.description ACCOUNTDESC, BR.branch_name BRANCH,A.RECORD_STAT,
                                   A.ACY_AVL_BAL BAL_AVAILABLE, Y.DATE_OF_BIRTH,NVL(Y.TELEPHONE, Y.FAX) CUSTOMER_PHONENUMBER,DECODE(B.CUSTOMER_TYPE,'C','CORPORATE','I','INDIVIDUAL') CUSTOMER_CATEGORY
                                   FROM {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT A
                                   INNER JOIN {_appSettings.FlexSchema}.STTM_CUSTOMER B ON B.CUSTOMER_NO = A.CUST_NO
@@ -91,7 +91,7 @@ namespace AccountEnquiry.Entities
                                   DECODE(C.ACCOUNT_CLASS,'222','S',C.ac_class_type) ACCOUNT_TYPE,
                                   A.CCY NAM_CCY_SHORT, A.AC_OPEN_DATE DAT_ACCT_OPEN, A.CUST_NO COD_CUST,A.AC_STAT_NO_DR, A.AC_STAT_NO_CR,
                                   A.AC_STAT_BLOCK, A.AC_STAT_STOP_PAY, A.AC_STAT_DORMANT, A.AC_STAT_FROZEN, A.ACCOUNT_CLASS COD_PROD,
-                                  A.AC_STAT_DE_POST,C.description ACCOUNTDESC, BR.branch_name BRANCH,
+                                  A.AC_STAT_DE_POST,C.description ACCOUNTDESC, BR.branch_name BRANCH,A.RECORD_STAT,
                                   A.ACY_AVL_BAL BAL_AVAILABLE, Y.DATE_OF_BIRTH,NVL(Y.TELEPHONE, Y.FAX) CUSTOMER_PHONENUMBER,DECODE(B.CUSTOMER_TYPE,'C','CORPORATE','I','INDIVIDUAL') CUSTOMER_CATEGORY
                                   FROM {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT A
                                   INNER JOIN {_appSettings.FlexSchema}.STTM_CUSTOMER B ON B.CUSTOMER_NO = A.CUST_NO
