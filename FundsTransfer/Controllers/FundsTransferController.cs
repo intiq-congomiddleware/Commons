@@ -86,9 +86,7 @@ namespace FundsTransfer.Controllers
                     }
                 }
 
-                string sproc = (request.with_charges) ? _appSettings.ChrgsSproc : _appSettings.PaytSproc;
-
-                resp = await _orclRepo.ExecuteTransaction(request, sproc);
+                resp = await _orclRepo.ExecuteTransaction(request);
 
                 if (resp.status?.ToUpper().Trim() == "Y")
                 {

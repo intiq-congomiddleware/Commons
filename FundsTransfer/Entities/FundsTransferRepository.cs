@@ -43,17 +43,16 @@ namespace FundsTransfer.Entities
             return response;
         }
 
-        public async Task<FundsTransferResponse> ExecuteTransaction(FundsTransferRequest request, string sproc)
+        public async Task<FundsTransferResponse> ExecuteTransaction(FundsTransferRequest request)
         {
             FundsTransferResponse resp = new FundsTransferResponse();
+
+            string sproc = (request.with_charges) ? (!string.IsNullOrEmpty(request.cract3) && request.trnamt2 > 0) 
+                ? _appSettings.ChrgsSproc2 : _appSettings.ChrgsSproc : _appSettings.PaytSproc;
 
             string storeProcedure = $"{_appSettings.FlexSchema}.{sproc}";
 
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
-
-            //string acc_ccy = (request.product == "CHDP") ? request.cract : request.dract;
-
-            //request.l_acs_ccy = await GetAccountCurrency(acc_ccy);
 
             request.trnrefno = $"{request.branch_code}{request.product}{request.l_acs_ccy}" +
                    $"{Commons.Helpers.Utility.RandomString(6)}";
@@ -61,11 +60,19 @@ namespace FundsTransfer.Entities
 
             var param = new DynamicParameters();
             param.Add("dract", request.dract.Trim());
-            if (!request.with_charges) param.Add("cract", request.cract?.Trim());
-            if (request.with_charges) param.Add("cract1", request.cract1?.Trim());
-            if (request.with_charges) param.Add("cract2", request.cract2?.Trim());
             param.Add("trnamt", request.trnamt);
-            if (request.with_charges) param.Add("trnamt1", request.trnamt1);
+            if (request.with_charges)
+            {
+                param.Add("cract1", request.cract1?.Trim());
+                param.Add("cract2", request.cract2?.Trim());
+                param.Add("cract3", request.cract3?.Trim());
+                param.Add("trnamt1", request.trnamt1);
+                param.Add("trnamt2", request.trnamt2);
+            }
+            else
+            {
+                param.Add("cract", request.cract?.Trim());
+            }
             param.Add("trnrefno", request.trnrefno.Trim());
             param.Add("l_acs_ccy", request.l_acs_ccy);
             param.Add("txnnarra", request.txnnarra);

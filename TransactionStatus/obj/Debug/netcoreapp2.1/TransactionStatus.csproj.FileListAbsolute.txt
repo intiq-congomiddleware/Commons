@@ -5,7 +5,6 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\bin\D
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\bin\Debug\netcoreapp2.1\TransactionStatus.pdb
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\bin\Debug\netcoreapp2.1\Commons.pdb
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\Debug\netcoreapp2.1\TransactionStatus.csprojAssemblyReference.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\Debug\netcoreapp2.1\TransactionStatus.csproj.CoreCompileInputs.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\Debug\netcoreapp2.1\TransactionStatus.RazorAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\Debug\netcoreapp2.1\TransactionStatus.RazorAssemblyInfo.cs

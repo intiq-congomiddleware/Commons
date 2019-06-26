@@ -5,7 +5,6 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\bin\Debu
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\bin\Debug\netcoreapp2.1\BalanceEnquiry.pdb
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\bin\Debug\netcoreapp2.1\Commons.pdb
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.csprojAssemblyReference.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.csproj.CoreCompileInputs.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.RazorAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.RazorAssemblyInfo.cs
@@ -15,3 +14,4 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debu
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\BalanceEnquiry\obj\Debug\netcoreapp2.1\BalanceEnquiry.csprojAssemblyReference.cache

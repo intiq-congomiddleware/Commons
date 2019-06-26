@@ -67,11 +67,11 @@ namespace FundsTransfer.Validators
                   .NotEmpty()
                   .MaximumLength(100);
 
-            RuleFor(req => req.prate)
+            RuleFor(req => req.prate1)
                   .NotNull()
                   .NotEmpty()
                   .GreaterThan(0)
-                  .When(x => x.with_charges);
+                  .When(x => x.with_charges);         
         }
     }
 }
