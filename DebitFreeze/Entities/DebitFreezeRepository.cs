@@ -40,6 +40,24 @@ namespace DebitFreeze.Entities
             return response;
         }
 
+        public async Task<BlockAccountResponse> BlockAccount(string accountNumber)
+        {
+            BlockAccountResponse response = new BlockAccountResponse();
+
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+
+            using (oralConnect)
+            {
+                string query = $@"UPDATE {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT SET AC_STAT_NO_DR = 'Y', AC_STAT_BLOCK = 'Y' WHERE CUST_AC_NO = :accountNumber";
+
+                var r = await oralConnect.QueryAsync<BlockAccountResponse>(query, new { accountNumber });
+
+                //response.message = r.FirstOrDefault();
+            }
+
+            return response;
+        }
+
         public string EncData(string value)
         {
             string output = string.Empty;

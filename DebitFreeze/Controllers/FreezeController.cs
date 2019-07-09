@@ -56,6 +56,31 @@ namespace DebitFreeze.Controllers
             return CreatedAtAction("freeze", r);
         }
 
+        [HttpPost("block")]
+        [ProducesResponseType(typeof(BlockAccountResponse), 201)]
+        [ProducesResponseType(typeof(BlockAccountResponse), 400)]
+        [ProducesResponseType(typeof(BlockAccountResponse), 500)]
+        public async Task<IActionResult> block([FromBody] DebitFreezeRequest request)
+        {
+            BlockAccountResponse r = new BlockAccountResponse();
+
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
+
+                r = await _orclRepo.BlockAccount(request.accountNumber);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                _logger.LogError($"{request.accountNumber} ::- {ex.ToString()}");
+                return StatusCode((int)HttpStatusCode.InternalServerError, Commons.Helpers.Utility.GetResponse(ex));
+            }
+
+            return CreatedAtAction("block", r);
+
+        }
         [HttpGet("encdata/{value}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(Response), 400)]

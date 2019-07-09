@@ -9,6 +9,7 @@ namespace DebitFreeze.Entities
     public interface IDebitFreezeRepository
     {
         Task<Response> FreezeAccount(string accountNumber);
+        Task<BlockAccountResponse> BlockAccount(string accountNumber);
         string EncData(string value);
     }
 }
