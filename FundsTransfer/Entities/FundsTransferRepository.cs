@@ -65,13 +65,21 @@ namespace FundsTransfer.Entities
             {
                 param.Add("cract1", request.cract1?.Trim());
                 param.Add("cract2", request.cract2?.Trim());
-                param.Add("cract3", request.cract3?.Trim());
+                //param.Add("cract3", request.cract3?.Trim());
                 param.Add("trnamt1", request.trnamt1);
-                param.Add("trnamt2", request.trnamt2);
+                //param.Add("trnamt2", request.trnamt2);
             }
             else
             {
                 param.Add("cract", request.cract?.Trim());
+            }
+            if (!string.IsNullOrEmpty(request.cract3))
+            {
+                param.Add("cract3", request.cract3?.Trim());
+            }
+            if (request.trnamt2 > 0)
+            {
+                param.Add("trnamt2", request.trnamt2);
             }
             param.Add("trnrefno", request.trnrefno.Trim());
             param.Add("l_acs_ccy", request.l_acs_ccy);

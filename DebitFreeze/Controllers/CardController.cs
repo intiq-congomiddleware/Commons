@@ -15,45 +15,19 @@ namespace DebitFreeze.Controllers
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [EnableCors("AccessAgencyBankingCorsPolicy")]
     [Produces("application/json")]
-    [Route("v1/debit")]
+    [Route("v1/card")]
     [ApiController]
-    public class FreezeController : Controller
+    public class CardController : Controller
     {
-
-        private readonly ILogger<FreezeController> _logger;
+        private readonly ILogger<CardController> _logger;
         private readonly IDebitFreezeRepository _orclRepo;
         private readonly AppSettings _appSettings;
-        public FreezeController(ILogger<FreezeController> logger, IDebitFreezeRepository orclRepo
+        public CardController(ILogger<CardController> logger, IDebitFreezeRepository orclRepo
           , IOptions<AppSettings> appSettings)
         {
             _logger = logger;
             _orclRepo = orclRepo;
             _appSettings = appSettings.Value;
-        }
-
-        [HttpPost("freeze")]
-        [ProducesResponseType(typeof(Response), 201)]
-        [ProducesResponseType(typeof(Response), 400)]
-        [ProducesResponseType(typeof(Response), 500)]
-        public async Task<IActionResult> freeze([FromBody] DebitFreezeRequest request)
-        {
-            Response r = new Response();
-
-            try
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
-
-                r = await _orclRepo.FreezeAccount(request.accountNumber);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                _logger.LogError($"{request.accountNumber} ::- {ex.ToString()}");
-                return StatusCode((int)HttpStatusCode.InternalServerError, Commons.Helpers.Utility.GetResponse(ex));
-            }
-
-            return CreatedAtAction("freeze", r);
         }
 
         [HttpPost("block")]
@@ -69,7 +43,7 @@ namespace DebitFreeze.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
 
-                r = await _orclRepo.BlockAccount(request.accountNumber);
+                r = await _orclRepo.BlockCard(request.accountNumber);
             }
             catch (Exception ex)
             {
@@ -79,15 +53,6 @@ namespace DebitFreeze.Controllers
             }
 
             return CreatedAtAction("block", r);
-        }      
-
-        [HttpGet("encdata/{value}")]
-        [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(Response), 400)]
-        [ProducesResponseType(typeof(Response), 500)]
-        public async Task<IActionResult> encdata(string value)
-        {
-            return Ok(_orclRepo.EncData(value));
         }
     }
 }

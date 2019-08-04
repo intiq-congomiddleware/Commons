@@ -5,7 +5,6 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\n
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\DebitFreeze.pdb
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\bin\Debug\netcoreapp2.1\Commons.pdb
-C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.csprojAssemblyReference.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.csproj.CoreCompileInputs.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.RazorAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.RazorAssemblyInfo.cs

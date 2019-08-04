@@ -10,6 +10,7 @@ namespace DebitFreeze.Entities
     {
         Task<Response> FreezeAccount(string accountNumber);
         Task<BlockAccountResponse> BlockAccount(string accountNumber);
+        Task<BlockAccountResponse> BlockCard(string accountNumber);
         string EncData(string value);
     }
 }

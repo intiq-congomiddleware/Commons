@@ -50,9 +50,45 @@ namespace DebitFreeze.Entities
             {
                 string query = $@"UPDATE {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT SET AC_STAT_NO_DR = 'Y', AC_STAT_BLOCK = 'Y' WHERE CUST_AC_NO = :accountNumber";
 
-                var r = await oralConnect.QueryAsync<BlockAccountResponse>(query, new { accountNumber });
+                var r = await oralConnect.ExecuteAsync(query, new { accountNumber });
 
-                //response.message = r.FirstOrDefault();
+                if (r > 0)
+                {
+                    response.status = "Y";
+                    response.message = "Account Blocked Successfully";
+                }
+                else
+                {
+                    response.status = "N";
+                    response.message = "Account Block Failed";
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<BlockAccountResponse> BlockCard(string accountNumber)
+        {
+            BlockAccountResponse response = new BlockAccountResponse();
+
+            var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
+
+            using (oralConnect)
+            {
+                string query = $@"UPDATE {_appSettings.FlexSchema}.STTM_CUST_ACCOUNT SET ATM_FACILITY='N' WHERE CUST_AC_NO =:accountNumber";
+
+                var r = await oralConnect.ExecuteAsync(query, new { accountNumber });
+
+                if (r > 0)
+                {
+                    response.status = "Y";
+                    response.message = "Card Transaction Blocked Successfully";
+                }
+                else
+                {
+                    response.status = "N";
+                    response.message = "Card Transaction Block Failed";
+                }
             }
 
             return response;
