@@ -26,7 +26,10 @@ namespace CurrencyRates.Entities
         }
         public async Task<CurrencyResponse> GetRates()
         {
-            CurrencyResponse response = new CurrencyResponse();
+            CurrencyResponse response = new CurrencyResponse()
+            {
+                status = "FAILED"
+            };
 
             var oralConnect = new OracleConnection(_protector.Unprotect(_appSettings.FlexConnection));
 
@@ -39,7 +42,7 @@ namespace CurrencyRates.Entities
 
                 var r = await oralConnect.QueryAsync<Rates>(query);
 
-                response = GetCurrencyResponse(r.ToList()); 
+                response = GetCurrencyResponse(r.ToList());
             }
 
             return response;
@@ -62,7 +65,11 @@ namespace CurrencyRates.Entities
             if (rates == null)
                 return null;
 
-            CurrencyResponse resp = new CurrencyResponse();
+            CurrencyResponse resp = new CurrencyResponse()
+            {
+                 status = "SUCCESSFUL"
+            };
+
             PropertyInfo[] properties = typeof(CurrencyResponse).GetProperties();
 
             foreach (PropertyInfo property in properties)

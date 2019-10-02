@@ -39,11 +39,13 @@ namespace CurrencyRates.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(Commons.Helpers.Utility.GetResponse(ModelState));
 
+                _logger.LogInformation($"request ID:{request.requestId} {Environment.NewLine} User ID:{request.userName}");
+
                 cr = await _orclRepo.GetRates();
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{request.requestId}:- {Environment.NewLine} {ex.ToString()}");
+                _logger.LogError($"request ID:{request.requestId} User ID:{request.userName}:- {Environment.NewLine} {ex.ToString()}");
                 return StatusCode((int)HttpStatusCode.InternalServerError, Commons.Helpers.Utility.GetResponse(ex));
             }
 
