@@ -14,3 +14,4 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\D
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\Debug\netcoreapp2.1\TransactionStatus.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\Debug\netcoreapp2.1\TransactionStatus.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\Debug\netcoreapp2.1\TransactionStatus.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\TransactionStatus\obj\Debug\netcoreapp2.1\TransactionStatus.csprojAssemblyReference.cache

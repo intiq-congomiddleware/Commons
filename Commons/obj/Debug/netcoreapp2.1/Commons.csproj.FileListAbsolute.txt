@@ -11,3 +11,4 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netco
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.RazorTargetAssemblyInfo.cache
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\Commons\obj\Debug\netcoreapp2.1\Commons.csprojAssemblyReference.cache

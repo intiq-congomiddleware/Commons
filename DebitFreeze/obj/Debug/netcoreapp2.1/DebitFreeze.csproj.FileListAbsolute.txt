@@ -14,3 +14,4 @@ C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\n
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.csproj.CopyComplete
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.dll
 C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\DebitFreeze\obj\Debug\netcoreapp2.1\DebitFreeze.csprojAssemblyReference.cache

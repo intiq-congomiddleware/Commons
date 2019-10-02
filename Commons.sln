@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountEnquiry", "AccountEn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransactionStatus", "TransactionStatus\TransactionStatus.csproj", "{717F53E8-DEE4-40F2-805A-BC40FDE15D2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebitFreeze", "DebitFreeze\DebitFreeze.csproj", "{4B4FE7C9-5868-43DE-A622-82550E096C56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebitFreeze", "DebitFreeze\DebitFreeze.csproj", "{4B4FE7C9-5868-43DE-A622-82550E096C56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatementGeneration", "StatementGeneration\StatementGeneration.csproj", "{A23B5844-A583-4BA6-909E-D741EF048D65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatementGeneration", "StatementGeneration\StatementGeneration.csproj", "{A23B5844-A583-4BA6-909E-D741EF048D65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyRates", "CurrencyRates\CurrencyRates.csproj", "{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{A23B5844-A583-4BA6-909E-D741EF048D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A23B5844-A583-4BA6-909E-D741EF048D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A23B5844-A583-4BA6-909E-D741EF048D65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
