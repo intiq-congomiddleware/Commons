@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DebitFreeze", "DebitFreeze\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatementGeneration", "StatementGeneration\StatementGeneration.csproj", "{A23B5844-A583-4BA6-909E-D741EF048D65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyRates", "CurrencyRates\CurrencyRates.csproj", "{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyRates", "CurrencyRates\CurrencyRates.csproj", "{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageUpload", "ImageUpload\ImageUpload.csproj", "{5BA0B09C-F5F7-4925-9986-557862BE646C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34879CCA-4CA8-4BA4-9CE1-DFAE327433F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BA0B09C-F5F7-4925-9986-557862BE646C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BA0B09C-F5F7-4925-9986-557862BE646C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BA0B09C-F5F7-4925-9986-557862BE646C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BA0B09C-F5F7-4925-9986-557862BE646C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

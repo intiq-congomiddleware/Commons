@@ -1,0 +1,17 @@
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.csprojAssemblyReference.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.csproj.CoreCompileInputs.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.RazorAssemblyInfo.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.RazorAssemblyInfo.cs
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.AssemblyInfoInputs.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.AssemblyInfo.cs
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\bin\Debug\netcoreapp2.1\ImageUpload.deps.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\bin\Debug\netcoreapp2.1\ImageUpload.runtimeconfig.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\bin\Debug\netcoreapp2.1\ImageUpload.runtimeconfig.dev.json
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\bin\Debug\netcoreapp2.1\ImageUpload.dll
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\bin\Debug\netcoreapp2.1\ImageUpload.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\bin\Debug\netcoreapp2.1\Commons.dll
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\bin\Debug\netcoreapp2.1\Commons.pdb
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.RazorTargetAssemblyInfo.cache
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.csproj.CopyComplete
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.dll
+C:\Users\Donald\Documents\Access\CongoMiddleware\Commons\ImageUpload\obj\Debug\netcoreapp2.1\ImageUpload.pdb

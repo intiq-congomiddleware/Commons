@@ -21,5 +21,7 @@ namespace Commons.Entities
         public string ChrgsSproc2 { get; set; }
         public string UserId { get; set; }
         public int Duration { get; set; }
+        public string UploadPath { get; set; }
+        public string DefaultFileExtension { get; set; }
     }
 }
